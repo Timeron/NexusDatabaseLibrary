@@ -23,6 +23,7 @@ public class WalletAccount {
 	private String name;
 	private String description;
 	private String currency;
+	@DateTimeFormat(pattern = "YYYY-MM-DD HH:mm:ss.S")
 	private Date timestamp;
 	@DateTimeFormat(pattern = "YYYY-MM-DD HH:mm:ss.S")
 	private Date updated;

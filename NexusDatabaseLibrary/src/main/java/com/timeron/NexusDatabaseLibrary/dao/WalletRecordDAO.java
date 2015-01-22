@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -24,8 +25,11 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 		List<WalletRecord> result = new ArrayList<WalletRecord>();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		criteria = session.createCriteria(WalletRecord.class);
-		criteria.add(Restrictions.eq("walletAccount", currentAccount));
+		criteria = session.createCriteria(WalletRecord.class)
+				.add(Restrictions.disjunction()
+						.add(Restrictions.eq("walletAccount", currentAccount))
+						.add(Restrictions.eq("destinationWalletAccount", currentAccount)));
+		criteria.addOrder(Order.asc("name"));
 		result = criteria.list();
 		
 		session.close();
