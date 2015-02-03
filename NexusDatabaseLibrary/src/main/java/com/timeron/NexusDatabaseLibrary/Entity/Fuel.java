@@ -16,9 +16,8 @@ public class Fuel {
 	private int id;
 	private float liters;
 	private float distance;
-	private boolean traffic;
+	private boolean city;
 	private boolean mixed;
-	private boolean track;
 	@DateTimeFormat(pattern = "YYYY-MM-DD HH:mm:ss.S")
 	private Date date;
 	
@@ -40,23 +39,17 @@ public class Fuel {
 	public void setDistance(float distance) {
 		this.distance = distance;
 	}
-	public boolean isTraffic() {
-		return traffic;
+	public boolean isCity() {
+		return city;
 	}
-	public void setTraffic(boolean traffic) {
-		this.traffic = traffic;
+	public void setCity(boolean city) {
+		this.city = city;
 	}
 	public boolean isMixed() {
 		return mixed;
 	}
 	public void setMixed(boolean mixed) {
 		this.mixed = mixed;
-	}
-	public boolean isTrack() {
-		return track;
-	}
-	public void setTrack(boolean track) {
-		this.track = track;
 	}
 	public Date getDate() {
 		return date;
