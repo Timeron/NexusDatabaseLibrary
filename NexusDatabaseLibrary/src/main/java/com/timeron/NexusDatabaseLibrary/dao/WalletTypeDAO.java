@@ -25,7 +25,7 @@ public class WalletTypeDAO extends DaoImp<WalletType>{
 		session.beginTransaction();
 		criteria = session.createCriteria(WalletType.class);
 		criteria.setResultTransformer(criteria.DISTINCT_ROOT_ENTITY);
-		criteria.addOrder(Order.asc("date"));
+		criteria.addOrder(Order.asc("timestamp"));
 		result = criteria.list();
 		
 		session.close();
