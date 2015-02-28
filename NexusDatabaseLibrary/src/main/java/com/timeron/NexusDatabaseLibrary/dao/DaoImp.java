@@ -13,10 +13,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.timeron.NexusDatabaseLibrary.dao.Enum.Direction;
 
 @Repository
 public abstract class DaoImp<T> implements DAO<T> {
@@ -90,7 +92,7 @@ public abstract class DaoImp<T> implements DAO<T> {
 	}
 
 	public void save(T entity) {
-		Session session = sessionFactory.openSession();
+		session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(entity);
 		session.getTransaction().commit();
@@ -107,23 +109,46 @@ public abstract class DaoImp<T> implements DAO<T> {
 
 	@SuppressWarnings("unchecked")
 	public void removeById(int id) {
-		Session session = sessionFactory.openSession();
+		T result;
+		session = sessionFactory.openSession();
 		session.beginTransaction();
 		criteria = session.createCriteria(getPersistantClass());
 		criteria.add(Restrictions.idEq(id));
-		T result = (T) criteria.list().get(0);
-		session.delete(result);
-		session.getTransaction().commit();
+		if(criteria.list().size() > 0){
+			result = (T) criteria.list().get(0);
+			session.delete(result);
+			session.getTransaction().commit();
+		}
 		session.close();
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<T> getAll() {
+		return getAll("", Direction.NONE, 0);
+	}
+	
+	public List<T> getAll(int maxResults) {
+		return getAll("", Direction.NONE, maxResults);
+	}
+	
+	public List<T> getAll(String orderBy, String direction) {
+		return getAll(orderBy, direction, 0);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> getAll(String orderBy, String direction, int maxResults){
 		List<T> entities = new ArrayList<T>();
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		entities = session.createCriteria(getPersistantClass()).list();
+		criteria = session.createCriteria(getPersistantClass());
+		if(direction != Direction.NONE){
+			if(direction == Direction.ASC){
+				criteria.addOrder(Order.asc(orderBy));
+			}else{
+				criteria.addOrder(Order.desc(orderBy));
+			}
+		}
+		entities = (List<T>) criteria.list();
 		session.close();
 
 		if (entities.size() > 0) {

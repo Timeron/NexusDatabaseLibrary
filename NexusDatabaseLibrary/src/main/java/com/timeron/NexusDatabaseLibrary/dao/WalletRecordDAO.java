@@ -20,8 +20,13 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 		// TODO Auto-generated constructor stub
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<WalletRecord> getRecordsFromAccount(WalletAccount currentAccount) {
+		int rows = 0;
+		return getRecordsFromAccount(currentAccount, rows);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<WalletRecord> getRecordsFromAccount(WalletAccount currentAccount, int rows) {
 		List<WalletRecord> result = new ArrayList<WalletRecord>();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -29,7 +34,10 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 				.add(Restrictions.disjunction()
 						.add(Restrictions.eq("walletAccount", currentAccount))
 						.add(Restrictions.eq("destinationWalletAccount", currentAccount)));
-		criteria.addOrder(Order.asc("name"));
+		criteria.addOrder(Order.asc("date"));
+		if(rows != 0){
+			criteria.setMaxResults(rows);
+		}
 		result = criteria.list();
 		
 		session.close();
