@@ -18,7 +18,7 @@ public class Fuel {
 	private float distance;
 	private boolean city;
 	private boolean mixed;
-	@DateTimeFormat(pattern = "YYYY-MM-DD HH:mm:ss.S")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.S")
 	private Date date;
 	
 	public int getId() {

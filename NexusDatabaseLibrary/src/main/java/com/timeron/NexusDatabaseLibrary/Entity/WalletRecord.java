@@ -22,9 +22,9 @@ public class WalletRecord {
 	private String description;
 	private boolean income;
 	private boolean transfer;
-	@DateTimeFormat(pattern = "YYYY-MM-DD HH:mm:ss.S")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.S")
 	private Date date;
-	@DateTimeFormat(pattern = "YYYY-MM-DD HH:mm:ss.S")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.S")
 	private Date updated;
 	
 	@ManyToOne
@@ -36,6 +36,9 @@ public class WalletRecord {
 	@ManyToOne
 	@JoinColumn(name="destination_wallet_account")
 	private WalletAccount destinationWalletAccount;
+	@ManyToOne
+	@JoinColumn(name="source_wallet_account")
+	private WalletAccount sourceWalletAccount;
 	
 	public Integer getId() {
 		return id;
@@ -84,6 +87,12 @@ public class WalletRecord {
 	}
 	public void setWalletAccount(WalletAccount walletAccount) {
 		this.walletAccount = walletAccount;
+	}
+	public WalletAccount getSourceWalletAccount() {
+		return sourceWalletAccount;
+	}
+	public void setSourceWalletAccount(WalletAccount sourceWalletAccount) {
+		this.sourceWalletAccount = sourceWalletAccount;
 	}
 	public WalletAccount getDestinationWalletAccount() {
 		return destinationWalletAccount;
