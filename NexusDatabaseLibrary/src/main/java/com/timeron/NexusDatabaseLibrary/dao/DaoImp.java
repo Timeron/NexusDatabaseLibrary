@@ -148,6 +148,9 @@ public abstract class DaoImp<T> implements DAO<T> {
 				criteria.addOrder(Order.desc(orderBy));
 			}
 		}
+		if(maxResults > 0){
+			criteria.setMaxResults(maxResults);
+		}
 		entities = (List<T>) criteria.list();
 		session.close();
 
