@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateJdbcException;
 import org.springframework.stereotype.Repository;
+import org.hibernate.Query;
 
 import com.timeron.NexusDatabaseLibrary.Entity.ObservedSite;
 import com.timeron.NexusDatabaseLibrary.Entity.ObservedSiteHistory;
@@ -44,6 +45,29 @@ public class ObservedSiteHistoryDAO extends DaoImp<ObservedSiteHistory>{
 			List<ObservedSiteHistory> emptyList = Collections.emptyList();
 			return emptyList;
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public boolean priceChanged(ObservedSiteHistory newObservedSiteHistory) {
+		List<ObservedSiteHistory> observedSiteHistories;
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		String hql = "FROM ObservedSiteHistory WHERE observedSite = '"+newObservedSiteHistory.getObservedSite().getId()+"' ORDER BY timestamp DESC";
+		Query query = session.createQuery(hql);
+		query.setMaxResults(1);
+		observedSiteHistories = (List<ObservedSiteHistory>) query.list();
+		session.close();
+		
+		if(!observedSiteHistories.isEmpty()){
+			if(newObservedSiteHistory.getPrice() != observedSiteHistories.get(0).getPrice() || newObservedSiteHistory.getOldPrice() != observedSiteHistories.get(0).getOldPrice()){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return true;
+		}
+		
 	}
 
 }
