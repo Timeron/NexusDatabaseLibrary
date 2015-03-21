@@ -15,9 +15,12 @@ import com.timeron.NexusDatabaseLibrary.Entity.Site;
 @Repository
 public class SiteDAO extends DaoImp<Site>{
 	
+	public SiteDAO() {
+		super(Site.class);
+	}
+	
 	public SiteDAO(Class<Site> persistantClass) {
 		super(persistantClass);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Autowired

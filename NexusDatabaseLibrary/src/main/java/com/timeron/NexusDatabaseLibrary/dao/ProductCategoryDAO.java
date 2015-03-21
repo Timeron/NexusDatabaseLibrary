@@ -14,9 +14,12 @@ import com.timeron.NexusDatabaseLibrary.Entity.ProductCategory;
 @Repository
 public class ProductCategoryDAO extends DaoImp<ProductCategory>{
 	
+	public ProductCategoryDAO() {
+		super(ProductCategory.class);
+	}
+	
 	public ProductCategoryDAO(Class<ProductCategory> persistantClass) {
 		super(persistantClass);
-		// TODO Auto-generated constructor stub
 	}
 
 	static Logger log = Logger.getLogger(ProductCategoryDAO.class.getName());

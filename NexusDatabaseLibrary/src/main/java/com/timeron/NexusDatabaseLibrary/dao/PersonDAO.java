@@ -17,9 +17,12 @@ import com.timeron.NexusDatabaseLibrary.dao.helper.PersonDaoHelper;
 @Repository
 public class PersonDAO extends DaoImp<NexusPerson>{
 
+	public PersonDAO() {
+		super(NexusPerson.class);
+	}
+	
 	public PersonDAO(Class<NexusPerson> persistantClass) {
 		super(persistantClass);
-		// TODO Auto-generated constructor stub
 	}
 
 	static Logger log = Logger.getLogger(PersonDAO.class.getName());

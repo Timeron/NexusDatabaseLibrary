@@ -8,9 +8,12 @@ import com.timeron.NexusDatabaseLibrary.Entity.WalletAccount;
 @Repository
 public class WalletDAO extends DaoImp<WalletAccount>{
 	
+	public WalletDAO() {
+		super(WalletAccount.class);
+	}
+	
 	public WalletDAO(Class<WalletAccount> persistantClass) {
 		super(persistantClass);
-		// TODO Auto-generated constructor stub
 	}
 
 	static Logger log = Logger.getLogger(WalletDAO.class.getName());

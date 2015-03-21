@@ -9,6 +9,10 @@ import com.timeron.NexusDatabaseLibrary.Entity.WalletAccount;
 @Repository
 public class WalletAccountDAO extends DaoImp<WalletAccount>{
 
+	public WalletAccountDAO() {
+		super(WalletAccount.class);
+	}
+	
 	public WalletAccountDAO(Class<WalletAccount> persistantClass) {
 		super(persistantClass);
 	}

@@ -13,9 +13,12 @@ import com.timeron.NexusDatabaseLibrary.Entity.SiteType;
 @Repository
 public class SiteTypeDAO extends DaoImp<SiteType>{
 
+	public SiteTypeDAO() {
+		super(SiteType.class);
+	}
+	
 	public SiteTypeDAO(Class<SiteType> persistantClass) {
 		super(persistantClass);
-		// TODO Auto-generated constructor stub
 	}
 
 	static Logger log = Logger.getLogger(SiteTypeDAO.class.getName());

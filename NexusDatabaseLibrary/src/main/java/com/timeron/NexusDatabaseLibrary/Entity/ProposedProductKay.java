@@ -8,11 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "proposed_product_kay")
+@Table(name = "mo_proposed_product_kay")
 public class ProposedProductKay {
 
 	@Id
@@ -20,7 +19,10 @@ public class ProposedProductKay {
 	private Integer id;
 	@Column(name = "percent_compatibility", length = 3)
 	private int percentCompatibility;
+	private int percentNameCompatibility;
 	private Date timestamp;
+	@Column(name = "last_updated")
+	private Date lastUpdated;
 	private boolean aprovedProductKay;
 
 	@ManyToOne
@@ -77,6 +79,26 @@ public class ProposedProductKay {
 
 	public void setObservedObject(ObservedObject observedObject) {
 		this.observedObject = observedObject;
+	}
+	
+	public void addPercentCompatibility(int percentCompatibility) {
+		this.percentCompatibility += percentCompatibility;
+	}
+
+	public int getPercentNameCompatibility() {
+		return percentNameCompatibility;
+	}
+
+	public void setPercentNameCompatibility(int percentNameCompatibility) {
+		this.percentNameCompatibility = percentNameCompatibility;
+	}
+
+	public Date getLastUpdated() {
+		return lastUpdated;
+	}
+
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
 	}
 	
 	

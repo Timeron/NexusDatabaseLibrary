@@ -12,6 +12,10 @@ import com.timeron.NexusDatabaseLibrary.Entity.ObservedObject;
 @Repository
 public class ObservedObjectDAO extends DaoImp<ObservedObject>{
 
+	public ObservedObjectDAO() {
+		super(ObservedObject.class);
+	}
+	
 	public ObservedObjectDAO(Class<ObservedObject> persistantClass) {
 		super(persistantClass);
 	}

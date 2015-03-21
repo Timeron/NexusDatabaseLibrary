@@ -16,9 +16,12 @@ import com.timeron.NexusDatabaseLibrary.Entity.ObservedSite;
 @Repository
 public class ObservedSiteDAO extends DaoImp<ObservedSite> {
 
+	public ObservedSiteDAO() {
+		super(ObservedSite.class);
+	}
+	
 	public ObservedSiteDAO(Class<ObservedSite> persistantClass) {
 		super(persistantClass);
-		// TODO Auto-generated constructor stub
 	}
 
 	static Logger log = Logger.getLogger(ObservedSiteDAO.class.getName());

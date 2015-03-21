@@ -8,9 +8,12 @@ import com.timeron.NexusDatabaseLibrary.dao.Enum.Config;
 
 public class NexusConfigDAO extends DaoImp<NexusConfigDAO>{
 
+	public NexusConfigDAO() {
+		super(NexusConfigDAO.class);
+	}
+	
 	public NexusConfigDAO(Class<NexusConfigDAO> persistantClass) {
 		super(persistantClass);
-		
 	}
 
 	public NexusConfig getParametr(String config) {

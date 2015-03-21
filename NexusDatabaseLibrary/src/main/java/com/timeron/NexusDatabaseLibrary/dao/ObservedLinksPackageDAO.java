@@ -14,9 +14,12 @@ import com.timeron.NexusDatabaseLibrary.Entity.ObservedLinksPackage;
 @Repository
 public class ObservedLinksPackageDAO extends DaoImp<ObservedLinksPackage>{
 
+	public ObservedLinksPackageDAO() {
+		super(ObservedLinksPackage.class);
+	}
+	
 	public ObservedLinksPackageDAO(Class<ObservedLinksPackage> persistantClass) {
 		super(persistantClass);
-		// TODO Auto-generated constructor stub
 	}
 
 	static Logger log = Logger.getLogger(SiteTypeDAO.class.getName());

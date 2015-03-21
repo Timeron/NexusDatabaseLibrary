@@ -13,9 +13,12 @@ import com.timeron.NexusDatabaseLibrary.Entity.WalletType;
 
 public class WalletTypeDAO extends DaoImp<WalletType>{
 
+	public WalletTypeDAO() {
+		super(WalletType.class);
+	}
+	
 	public WalletTypeDAO(Class<WalletType> persistantClass) {
 		super(persistantClass);
-		// TODO Auto-generated constructor stub
 	}
 
 	@SuppressWarnings("unchecked")
