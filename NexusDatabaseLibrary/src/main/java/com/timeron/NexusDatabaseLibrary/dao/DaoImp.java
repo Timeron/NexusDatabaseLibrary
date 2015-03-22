@@ -170,7 +170,11 @@ public abstract class DaoImp<T> implements DAO<T> {
 			transaction = session.beginTransaction();
 			criteria = session.createCriteria(getPersistantClass());
 			criteria.add(Restrictions.idEq(id));
-			entity = (T) criteria.list().get(0);
+			if(criteria.list().size()>0){
+				entity = (T) criteria.list().get(0);
+			}else{
+				entity = null;
+			}
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		} finally {
