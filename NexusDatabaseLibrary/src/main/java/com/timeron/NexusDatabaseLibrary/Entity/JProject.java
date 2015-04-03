@@ -11,22 +11,28 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name="j_project")
 public class JProject {
 
 	@Id
 	@GeneratedValue
+	@Expose
 	private int id;
-	
+	@Expose
 	private String name;
-	
+	@Expose
 	private String description;
-	
+	@Expose
 	private Date created;
 	
 	@OneToMany(mappedBy="project")
 	private List<JTask> task;
+	
+	@OneToMany(mappedBy="project")
+	private List<JRelease> releases;
 	
 	@ManyToOne
 	@JoinColumn(name="status")
@@ -97,8 +103,13 @@ public class JProject {
 	public void setUser(NexusUser user) {
 		this.user = user;
 	}
-	
-	
-	
+
+	public List<JRelease> getReleases() {
+		return releases;
+	}
+
+	public void setReleases(List<JRelease> releases) {
+		this.releases = releases;
+	}
 	
 }

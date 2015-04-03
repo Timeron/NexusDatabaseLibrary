@@ -5,6 +5,7 @@
 		<class>com.timeron.NexusDatabaseLibrary.Entity.JHistory</class>
 		<class>com.timeron.NexusDatabaseLibrary.Entity.JNote</class>
 		<class>com.timeron.NexusDatabaseLibrary.Entity.JProject</class>
+		<class>com.timeron.NexusDatabaseLibrary.Entity.JRelease</class>
 		<class>com.timeron.NexusDatabaseLibrary.Entity.JStatus</class>
 		<class>com.timeron.NexusDatabaseLibrary.Entity.JTask</class>
 		<class>com.timeron.NexusDatabaseLibrary.Entity.JTaskType</class>
