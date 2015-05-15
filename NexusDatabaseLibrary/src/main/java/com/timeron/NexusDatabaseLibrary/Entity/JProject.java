@@ -12,24 +12,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.google.gson.annotations.Expose;
-
 @Entity
 @Table(name="j_project")
 public class JProject {
 
 	@Id
 	@GeneratedValue
-	@Expose
 	private int id;
-	@Expose
 	private String name;
-	@Expose
 	private String description;
-	@Expose
 	private Date created;
+	private String prefix;
 	
-	@OneToMany(mappedBy="project")
+	@OneToMany(mappedBy="project", fetch=FetchType.EAGER)
 	private List<JTask> task;
 	
 	@OneToMany(mappedBy="project")
@@ -111,6 +106,14 @@ public class JProject {
 
 	public void setReleases(List<JRelease> releases) {
 		this.releases = releases;
+	}
+
+	public String getPrefix() {
+		return prefix;
+	}
+
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
 	}
 	
 }

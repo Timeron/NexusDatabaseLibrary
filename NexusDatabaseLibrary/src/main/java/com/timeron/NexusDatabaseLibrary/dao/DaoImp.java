@@ -13,20 +13,23 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.timeron.NexusDatabaseLibrary.Entity.Interface.NexusEntity;
 import com.timeron.NexusDatabaseLibrary.dao.Enum.Direction;
 
 @Repository
 public abstract class DaoImp<T> implements DAO<T> {
 
 	private Class<T> persistantClass;
-	private EntityManager entityManager;
-	protected static Session session;
-	protected static Transaction transaction;
+	private  EntityManager entityManager;
+	protected  Session session;
+	protected  Transaction transaction;
 
 	public Criteria criteria;
 	public List<T> results;
@@ -91,12 +94,20 @@ public abstract class DaoImp<T> implements DAO<T> {
 		this.persistantClass = persistantClass;
 	}
 
-	public void save(T entity) {
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.save(entity);
-		session.getTransaction().commit();
-		session.close();
+	public boolean save(T entity) {
+		boolean result = true;
+		try{
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.save(entity);
+			session.getTransaction().commit();
+		}catch(Exception ex){
+			ex.printStackTrace();
+			result = false;
+		}finally{
+			session.close();
+		}
+		return result;
 	}
 
 	public void update(T entity) {
@@ -151,6 +162,7 @@ public abstract class DaoImp<T> implements DAO<T> {
 		if(maxResults > 0){
 			criteria.setMaxResults(maxResults);
 		}
+		criteria.setResultTransformer(criteria.DISTINCT_ROOT_ENTITY);
 		entities = (List<T>) criteria.list();
 		session.close();
 
@@ -181,6 +193,29 @@ public abstract class DaoImp<T> implements DAO<T> {
 			session.close();
 		}
 		return entity;
+	}
+	
+	public int getLastId(){
+		NexusEntity entity = null;
+		int lastId = 0;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			criteria = session.createCriteria(getPersistantClass());
+			criteria.addOrder(Order.desc("id"));
+			criteria.setMaxResults(1);
+			if(criteria.list() != null && criteria.list().size() > 0){
+				entity = (NexusEntity) criteria.list().get(0);
+				lastId = entity.getId();
+			}else{
+				lastId = 0;
+			}
+		} catch (HibernateException ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return lastId;
 	}
 
 }

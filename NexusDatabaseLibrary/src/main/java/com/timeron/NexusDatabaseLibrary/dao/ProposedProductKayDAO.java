@@ -22,15 +22,15 @@ public class ProposedProductKayDAO extends DaoImp<ProposedProductKay>{
 
 	static Logger log = Logger.getLogger(ProposedProductKayDAO.class.getName());
 	
-	public void save(ProposedProductKay proposedProductKay) {
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.save(proposedProductKay);
-		session.getTransaction().commit();
-		session.close();
-		log.info("ObservedSite saved");
-		
-	}
+//	public void save(ProposedProductKay proposedProductKay) {
+//		session = sessionFactory.openSession();
+//		session.beginTransaction();
+//		session.save(proposedProductKay);
+//		session.getTransaction().commit();
+//		session.close();
+//		log.info("ObservedSite saved");
+//		
+//	}
 
 	@SuppressWarnings("unchecked")
 	public List<ProposedProductKay> getByObservedSiteAndObject(ObservedSite observedSite,

@@ -1,9 +1,11 @@
 package com.timeron.NexusDatabaseLibrary.Entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,8 +18,8 @@ public class JTaskType {
 	
 	private String description;
 	
-	@OneToOne(mappedBy="taskType")
-	private JTask task;
+	@OneToMany(mappedBy="taskType")
+	private List<JTask> task;
 	
 	/**
 	 * Getters & Setters
@@ -39,13 +41,12 @@ public class JTaskType {
 		this.description = description;
 	}
 
-	public JTask getTask() {
+	public List<JTask> getTask() {
 		return task;
 	}
 
-	public void setTask(JTask task) {
+	public void setTask(List<JTask> task) {
 		this.task = task;
 	}
-	
 	
 }

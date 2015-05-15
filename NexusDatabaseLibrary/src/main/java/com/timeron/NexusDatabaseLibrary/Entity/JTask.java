@@ -12,9 +12,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.timeron.NexusDatabaseLibrary.Entity.Interface.NexusEntity;
+
 @Entity
 @Table(name="j_task")
-public class JTask {
+public class JTask implements NexusEntity{
 	
 	@Id
 	@GeneratedValue
@@ -23,9 +25,11 @@ public class JTask {
 	private String name;
 	private String summary;
 	private String description;
+	private Integer priority;
 	private Date created;
+	private Date updated;
 	
-	@OneToOne
+	@ManyToOne
     @JoinColumn(name = "j_task_type")
 	private JTaskType taskType;
 	
@@ -100,6 +104,14 @@ public class JTask {
 		this.created = created;
 	}
 
+	public Integer getPriority() {
+		return priority;
+	}
+
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+
 	public JTaskType getTaskType() {
 		return taskType;
 	}
@@ -163,8 +175,13 @@ public class JTask {
 	public void setMainTask(JTask mainTask) {
 		this.mainTask = mainTask;
 	}
-	
 
-	
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
 
 }
