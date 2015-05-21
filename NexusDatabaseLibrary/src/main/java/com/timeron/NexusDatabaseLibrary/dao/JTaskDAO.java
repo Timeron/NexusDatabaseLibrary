@@ -28,5 +28,17 @@ public class JTaskDAO extends DaoImp<JTask> {
 		session.close();
 		return jTasks;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<JTask> getByProjectId(int projectId) {
+		List<JTask> jTasks;
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		criteria = session.createCriteria(JTask.class);
+		criteria.add(Restrictions.eq("project", projectId));
+		jTasks = (List<JTask>) criteria.list();
+		session.close();
+		return jTasks;
+	}
 
 }
