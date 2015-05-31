@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.hibernate.Session;
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.timeron.NexusDatabaseLibrary.Entity.WalletAccount;
 import com.timeron.NexusDatabaseLibrary.Entity.WalletRecord;
 import com.timeron.NexusDatabaseLibrary.dao.Enum.Direction;
+import com.timeron.NexusDatabaseLibrary.helper.JpaHelper;
 
 @Repository
 public class WalletRecordDAO extends DaoImp<WalletRecord>{
@@ -20,10 +21,6 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 		super(WalletRecord.class);
 	}
 	
-	public WalletRecordDAO(Class<WalletRecord> persistantClass) {
-		super(persistantClass);
-	}
-
 	public List<WalletRecord> getRecordsFromAccount(WalletAccount currentAccount) {
 		int rows = 0;
 		return getRecordsFromAccount(currentAccount, null ,rows);
@@ -41,10 +38,8 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 	@SuppressWarnings("unchecked")
 	public List<WalletRecord> getRecordsFromAccount(WalletAccount currentAccount, String direction, int rows) {
 		List<WalletRecord> result = new ArrayList<WalletRecord>();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		criteria = session.createCriteria(WalletRecord.class)
-				.add(Restrictions.disjunction()
+		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
+		criteria = criteria.add(Restrictions.disjunction()
 						.add(Restrictions.eq("walletAccount", currentAccount))
 						.add(Restrictions.eq("destinationWalletAccount", currentAccount)));
 		if(direction != null){
@@ -58,8 +53,6 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 			criteria.setMaxResults(rows);
 		}
 		result = criteria.list();
-		
-		session.close();
 		
 		if (result.size() > 0) {
 			return result;

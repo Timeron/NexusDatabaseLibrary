@@ -4,34 +4,28 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.hibernate.Session;
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate4.HibernateJdbcException;
+import org.springframework.stereotype.Repository;
 
 import com.timeron.NexusDatabaseLibrary.Entity.WalletType;
+import com.timeron.NexusDatabaseLibrary.helper.JpaHelper;
 
+@Repository
 public class WalletTypeDAO extends DaoImp<WalletType>{
 
 	public WalletTypeDAO() {
 		super(WalletType.class);
 	}
-	
-	public WalletTypeDAO(Class<WalletType> persistantClass) {
-		super(persistantClass);
-	}
 
 	@SuppressWarnings("unchecked")
-	public List<WalletType> getAll() throws HibernateJdbcException {
+	public List<WalletType> getAll() {
 		List<WalletType> result = new ArrayList<WalletType>();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		criteria = session.createCriteria(WalletType.class);
+		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 		criteria.setResultTransformer(criteria.DISTINCT_ROOT_ENTITY);
 		criteria.addOrder(Order.asc("timestamp"));
 		result = criteria.list();
-		
-		session.close();
 		
 		if (result.size() > 0) {
 			return result;
@@ -44,15 +38,11 @@ public class WalletTypeDAO extends DaoImp<WalletType>{
 	@SuppressWarnings("unchecked")
 	public List<WalletType> getAllParents() {
 		List<WalletType> result = new ArrayList<WalletType>();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		criteria = session.createCriteria(WalletType.class);
+		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 		criteria.add(Restrictions.isNull("parentType"));
 		criteria.setResultTransformer(criteria.DISTINCT_ROOT_ENTITY);
 		criteria.addOrder(Order.asc("name"));
 		result = criteria.list();
-		
-		session.close();
 		
 		if (result.size() > 0) {
 			return result;
@@ -64,27 +54,22 @@ public class WalletTypeDAO extends DaoImp<WalletType>{
 	
 	public boolean checkIfAvailableByName(String name){
 		boolean result = false;
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		criteria = session.createCriteria(WalletType.class);
+		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 		criteria.add(Restrictions.eq("name", name));
 		criteria.setResultTransformer(criteria.DISTINCT_ROOT_ENTITY);
 		if(criteria.list().size() > 0){
 			result = true;
 		}
-		session.close();
+
 		return result;
 	}
 	
 	public WalletType getByName(String name){
 		WalletType result = new WalletType();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		criteria = session.createCriteria(WalletType.class);
+		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 		criteria.add(Restrictions.eq("name", name));
 		criteria.setResultTransformer(criteria.DISTINCT_ROOT_ENTITY);
 		result = (WalletType) criteria.list().get(0);
-		session.close();
 		return result;
 	}
 	

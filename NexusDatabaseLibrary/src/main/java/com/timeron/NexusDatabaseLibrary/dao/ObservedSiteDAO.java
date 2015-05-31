@@ -5,13 +5,16 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionException;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.timeron.NexusDatabaseLibrary.Entity.ObservedSite;
+import com.timeron.NexusDatabaseLibrary.helper.JpaHelper;
 
 @Repository
 public class ObservedSiteDAO extends DaoImp<ObservedSite> {
@@ -19,33 +22,25 @@ public class ObservedSiteDAO extends DaoImp<ObservedSite> {
 	public ObservedSiteDAO() {
 		super(ObservedSite.class);
 	}
-	
-	public ObservedSiteDAO(Class<ObservedSite> persistantClass) {
-		super(persistantClass);
-	}
 
 	static Logger log = Logger.getLogger(ObservedSiteDAO.class.getName());
 
 	public boolean checkIfIdExist(ObservedSite observedSite) {
 		ObservedSite observedSiteDB;
-		session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = JpaHelper.createSession(entityManager, persistantClass);
 		observedSiteDB = (ObservedSite) session.get(ObservedSite.class,
 				observedSite.getId());
-		session.close();
 		return observedSiteDB.getId() != null ? true : false;
 	}
 
 	@SuppressWarnings("unchecked")
 	public boolean checkIfHashExist(ObservedSite observedSite) {
 		List<ObservedSite> observedSites;
-		session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = JpaHelper.createSession(entityManager, persistantClass);
 		String hql = "FROM ObservedSite WHERE hashUrl = '"
 				+ observedSite.getHashUrl() + "'";
 		Query query = session.createQuery(hql);
 		observedSites = (List<ObservedSite>) query.list();
-		session.close();
 
 		if (observedSites.isEmpty()) {
 			return false;
@@ -61,13 +56,11 @@ public class ObservedSiteDAO extends DaoImp<ObservedSite> {
 	@SuppressWarnings("unchecked")
 	public ObservedSite getEntity(ObservedSite observedSite) {
 		List<ObservedSite> observedSites;
-		session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = JpaHelper.createSession(entityManager, persistantClass);
 		String hql = "FROM ObservedSite WHERE hashUrl = '"
 				+ observedSite.getHashUrl() + "'";
 		Query query = session.createQuery(hql);
 		observedSites = (List<ObservedSite>) query.list();
-		session.close();
 
 		return observedSites.get(0);
 	}
@@ -75,13 +68,11 @@ public class ObservedSiteDAO extends DaoImp<ObservedSite> {
 	@SuppressWarnings("unchecked")
 	public Integer getId(ObservedSite observedSite) {
 		List<ObservedSite> observedSites;
-		session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = JpaHelper.createSession(entityManager, persistantClass);
 		String hql = "FROM ObservedSite WHERE hashUrl = '"
 				+ observedSite.getHashUrl() + "'";
 		Query query = session.createQuery(hql);
 		observedSites = (List<ObservedSite>) query.list();
-		session.close();
 		return observedSites.get(0).getId();
 	}
 
@@ -97,13 +88,11 @@ public class ObservedSiteDAO extends DaoImp<ObservedSite> {
 
 		Date today = new Date(cal.getTimeInMillis());
 
-		session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = JpaHelper.createSession(entityManager, persistantClass);
 		String hql = "FROM ObservedSite WHERE hashUrl = '"
 				+ observedSite.getHashUrl() + "'";
 		Query query = session.createQuery(hql);
 		observedSites = (List<ObservedSite>) query.list();
-		session.close();
 
 		if (observedSites.get(0).getTimestamp().after(today)) {
 			return true;
@@ -118,19 +107,14 @@ public class ObservedSiteDAO extends DaoImp<ObservedSite> {
 		log.info("session");
 		List<ObservedSite> observedSite = null;
 
-		session = sessionFactory.openSession();
-		session.beginTransaction();
+		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 
 		try {
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			criteria = session.createCriteria(ObservedSite.class);
 			criteria.add(Restrictions.isNull("observedObject"));
 			observedSite = criteria.list();
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		} finally {
-			session.close();
 		}
 
 		return observedSite;
@@ -141,10 +125,7 @@ public class ObservedSiteDAO extends DaoImp<ObservedSite> {
 	public List<ObservedSite> search(ObservedSite searchParameters) {
 		List<ObservedSite> result = null;
 
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		
-		criteria = session.createCriteria(ObservedSite.class);
+		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 		if(searchParameters.getId()!=null){
 			criteria.add(Restrictions.idEq(searchParameters.getId()));
 		}
@@ -165,7 +146,6 @@ public class ObservedSiteDAO extends DaoImp<ObservedSite> {
 			criteria.add(Restrictions.eq("approvedProductKay", true));
 		}
 		result = criteria.list();
-		session.close();
 		
 		return result;
 	}

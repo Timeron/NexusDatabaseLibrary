@@ -9,16 +9,13 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.timeron.NexusDatabaseLibrary.Entity.SiteType;
+import com.timeron.NexusDatabaseLibrary.helper.JpaHelper;
 
 @Repository
 public class SiteTypeDAO extends DaoImp<SiteType>{
 
 	public SiteTypeDAO() {
 		super(SiteType.class);
-	}
-	
-	public SiteTypeDAO(Class<SiteType> persistantClass) {
-		super(persistantClass);
 	}
 
 	static Logger log = Logger.getLogger(SiteTypeDAO.class.getName());
@@ -27,14 +24,13 @@ public class SiteTypeDAO extends DaoImp<SiteType>{
 	public SiteType getByDescription(String description) {
 		List<SiteType> siteType = new ArrayList<SiteType>();
 		
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = JpaHelper.createSession(entityManager, persistantClass);
 		
 		String hql = "FROM SiteType WHERE description = '"+description+"'";
 		
 		Query query = session.createQuery(hql);
 		siteType = (List<SiteType>) query.list();
-		session.close();
+
 		if(siteType.isEmpty()){
 			return new SiteType();
 		}else{

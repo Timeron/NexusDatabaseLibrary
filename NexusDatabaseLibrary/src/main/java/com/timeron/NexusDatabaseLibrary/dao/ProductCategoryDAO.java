@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.timeron.NexusDatabaseLibrary.Entity.ProductCategory;
+import com.timeron.NexusDatabaseLibrary.helper.JpaHelper;
 
 @Repository
 public class ProductCategoryDAO extends DaoImp<ProductCategory>{
@@ -17,24 +18,17 @@ public class ProductCategoryDAO extends DaoImp<ProductCategory>{
 	public ProductCategoryDAO() {
 		super(ProductCategory.class);
 	}
-	
-	public ProductCategoryDAO(Class<ProductCategory> persistantClass) {
-		super(persistantClass);
-	}
 
 	static Logger log = Logger.getLogger(ProductCategoryDAO.class.getName());
 
 	@SuppressWarnings("unchecked")
 	public List<ProductCategory> getByDescription(String description) {
 		List<ProductCategory> productCategory = new ArrayList<ProductCategory>();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = JpaHelper.createSession(entityManager, persistantClass);
 		String hql = "FROM ProductCategory WHERE upper(description) = '"+description.toUpperCase()+"'";
 		
 		Query query = session.createQuery(hql);
 		productCategory = (List<ProductCategory>) query.list();
-		
-		session.close();
 		
 		if (productCategory.size() > 0) {
 			return productCategory;

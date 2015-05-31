@@ -7,151 +7,117 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.timeron.NexusDatabaseLibrary.Entity.Interface.NexusEntity;
 import com.timeron.NexusDatabaseLibrary.dao.Enum.Direction;
+import com.timeron.NexusDatabaseLibrary.helper.JpaHelper;
 
 @Repository
 public abstract class DaoImp<T> implements DAO<T> {
 
-	private Class<T> persistantClass;
-	private  EntityManager entityManager;
-	protected  Session session;
-	protected  Transaction transaction;
+	static Logger LOG = Logger.getLogger(DaoImp.class);
+	
+	protected Class<T> persistantClass;
+	protected  EntityManager entityManager;
+//	protected  Session session;
+//	protected  Transaction transaction;
+//	private static ServiceRegistry serviceRegistry;
+//	protected SessionFactory sessionFactory;
 
-	public Criteria criteria;
 	public List<T> results;
-
-	public SessionFactory sessionFactory;
 
 	public DaoImp(Class<T> persistantClass) {
 		this.persistantClass = persistantClass;
-		sessionFactory = new Configuration().configure().buildSessionFactory();
 	}
-
-	public EntityManager getEntityManager() {
-		return this.entityManager;
-	}
-
+	
 	@PersistenceContext
-	public void setEntityManager(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
 	public Class<T> getPersistantClass() {
 		return persistantClass;
-	}
-
-	@Transactional(readOnly = true)
-	public T findById(int id) {
-		T entity = (T) getEntityManager().find(getPersistantClass(), id);
-		return entity;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Transactional(readOnly = true)
-	public List<T> findAll() {
-		return getEntityManager().createQuery(
-				"select x from " + getPersistantClass().getSimpleName() + " x")
-				.getResultList();
-	}
-
-	// public T save(T entity){
-	// getEntityManager().persist(entity);
-	// return entity;
-	// }
-
-	// public T update(T entity) {
-	// T mergedEntity = getEntityManager().merge(entity);
-	// return mergedEntity;
-	// }
-
-	public void flush() {
-		getEntityManager().flush();
-	}
-
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
 	}
 
 	public void setPersistantClass(Class<T> persistantClass) {
 		this.persistantClass = persistantClass;
 	}
 
+	@Transactional
 	public boolean save(T entity) {
+		LOG.info("enter save");
 		boolean result = true;
 		try{
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-			session.save(entity);
-			session.getTransaction().commit();
+			entityManager.merge(entity);
 		}catch(Exception ex){
 			ex.printStackTrace();
 			result = false;
 		}finally{
-			session.close();
+
 		}
+		LOG.info("exit save");
 		return result;
 	}
 
+	@Transactional
 	public void update(T entity) {
-		session = sessionFactory.openSession();
-		session.beginTransaction();
+		LOG.info("enter update");
+		Session session = JpaHelper.createSession(entityManager, persistantClass);
+
 		session.update(entity);
 		session.getTransaction().commit();
-		session.close();
+
+		LOG.info("exit update");
 	}
 
+	@Transactional
 	@SuppressWarnings("unchecked")
 	public void removeById(int id) {
+		LOG.info("enter removeById");
 		T result;
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		criteria = session.createCriteria(getPersistantClass());
+
+		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 		criteria.add(Restrictions.idEq(id));
 		if(criteria.list().size() > 0){
+			Session session = JpaHelper.createSession(entityManager, persistantClass);
 			result = (T) criteria.list().get(0);
 			session.delete(result);
 			session.getTransaction().commit();
 		}
-		session.close();
+
+		LOG.info("exit removeById");
 	}
 
+	@Transactional
 	public List<T> getAll() {
 		return getAll("", Direction.NONE, 0);
 	}
 	
+	@Transactional
 	public List<T> getAll(int maxResults) {
 		return getAll("", Direction.NONE, maxResults);
 	}
 	
+	@Transactional
 	public List<T> getAll(String orderBy, String direction) {
 		return getAll(orderBy, direction, 0);
 	}
 	
-	@SuppressWarnings("unchecked")
+	@Transactional
+	@SuppressWarnings({ "unchecked", "static-access" })
 	public List<T> getAll(String orderBy, String direction, int maxResults){
+		LOG.info("enter getAll");
 		List<T> entities = new ArrayList<T>();
 
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		criteria = session.createCriteria(getPersistantClass());
+		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 		if(direction != Direction.NONE){
 			if(direction == Direction.ASC){
 				criteria.addOrder(Order.asc(orderBy));
@@ -164,23 +130,26 @@ public abstract class DaoImp<T> implements DAO<T> {
 		}
 		criteria.setResultTransformer(criteria.DISTINCT_ROOT_ENTITY);
 		entities = (List<T>) criteria.list();
-		session.close();
+		
 
+		LOG.info("exit getAll");
 		if (entities.size() > 0) {
 			return entities;
 		} else {
 			List<T> emptyList = Collections.emptyList();
 			return emptyList;
 		}
+		
 	}
 
+	@Transactional
 	@SuppressWarnings("unchecked")
 	public T getById(int id) {
+		LOG.info("enter getById");
 		T entity = null;
 		try {
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			criteria = session.createCriteria(getPersistantClass());
+			Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
+			
 			criteria.add(Restrictions.idEq(id));
 			if(criteria.list().size()>0){
 				entity = (T) criteria.list().get(0);
@@ -190,21 +159,22 @@ public abstract class DaoImp<T> implements DAO<T> {
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		} finally {
-			session.close();
+
 		}
+		LOG.info("exit getById");
 		return entity;
 	}
 	
+	@Transactional
 	public int getLastId(){
+		LOG.info("enter getLastId");
 		NexusEntity entity = null;
 		int lastId = 0;
 		try {
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			criteria = session.createCriteria(getPersistantClass());
+			Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 			criteria.addOrder(Order.desc("id"));
 			criteria.setMaxResults(1);
-			if(criteria.list() != null && criteria.list().size() > 0){
+			if(criteria.list().size() > 0){
 				entity = (NexusEntity) criteria.list().get(0);
 				lastId = entity.getId();
 			}else{
@@ -212,9 +182,10 @@ public abstract class DaoImp<T> implements DAO<T> {
 			}
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
-		} finally {
-			session.close();
+		}finally {
+
 		}
+		LOG.info("exit getLastId");
 		return lastId;
 	}
 

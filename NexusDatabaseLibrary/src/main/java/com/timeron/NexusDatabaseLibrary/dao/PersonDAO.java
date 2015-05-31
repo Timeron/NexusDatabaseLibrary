@@ -5,24 +5,19 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.timeron.NexusDatabaseLibrary.Entity.NexusPerson;
 import com.timeron.NexusDatabaseLibrary.dao.helper.PersonDaoHelper;
+import com.timeron.NexusDatabaseLibrary.helper.JpaHelper;
 
 @Repository
 public class PersonDAO extends DaoImp<NexusPerson>{
 
 	public PersonDAO() {
 		super(NexusPerson.class);
-	}
-	
-	public PersonDAO(Class<NexusPerson> persistantClass) {
-		super(persistantClass);
 	}
 
 	static Logger log = Logger.getLogger(PersonDAO.class.getName());
@@ -33,13 +28,11 @@ public class PersonDAO extends DaoImp<NexusPerson>{
 
 		PersonDaoHelper personDaoHelper = new PersonDaoHelper();
 
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = JpaHelper.createSession(entityManager, persistantClass);
 
 		Query query = session.createQuery(personDaoHelper
 				.buildQuerySearchPerson(nexusPerson));
 		nexusPersonList = (List<NexusPerson>) query.list();
-		session.close();
 		if (nexusPersonList.size() > 0) {
 			return nexusPersonList;
 		} else {
@@ -54,14 +47,11 @@ public class PersonDAO extends DaoImp<NexusPerson>{
 		List<NexusPerson> nexusPersonList = new ArrayList<NexusPerson>();
 		PersonDaoHelper personDaoHelper = new PersonDaoHelper();
 		
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = JpaHelper.createSession(entityManager, persistantClass);
 		
 		Query query = session.createQuery(personDaoHelper
 				.buildGetAllPerson());
 		nexusPersonList = (List<NexusPerson>) query.list();
-		
-		session.close();
 		
 		if (nexusPersonList.size() > 0) {
 			return nexusPersonList;

@@ -11,10 +11,6 @@ public class WalletDAO extends DaoImp<WalletAccount>{
 	public WalletDAO() {
 		super(WalletAccount.class);
 	}
-	
-	public WalletDAO(Class<WalletAccount> persistantClass) {
-		super(persistantClass);
-	}
 
 	static Logger log = Logger.getLogger(WalletDAO.class.getName());
 	

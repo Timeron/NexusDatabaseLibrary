@@ -11,16 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.timeron.NexusDatabaseLibrary.Entity.Site;
+import com.timeron.NexusDatabaseLibrary.helper.JpaHelper;
 
 @Repository
 public class SiteDAO extends DaoImp<Site>{
 	
 	public SiteDAO() {
 		super(Site.class);
-	}
-	
-	public SiteDAO(Class<Site> persistantClass) {
-		super(persistantClass);
 	}
 
 	@Autowired
@@ -33,15 +30,12 @@ public class SiteDAO extends DaoImp<Site>{
 	@SuppressWarnings("unchecked")
 	public List<Site> getByName(String name) {
 		List<Site> sites = new ArrayList<Site>();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = JpaHelper.createSession(entityManager, persistantClass);
 		String hql = "FROM Site WHERE name ='"+name+"'";
 		
 		
 		Query query = session.createQuery(hql);
 		sites = (List<Site>) query.list();
-		
-		session.close();
 		
 		if (sites.size() > 0) {
 			return sites;
