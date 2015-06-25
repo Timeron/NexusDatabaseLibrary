@@ -70,11 +70,7 @@ public abstract class DaoImp<T> implements DAO<T> {
 	@Transactional
 	public void update(T entity) {
 		LOG.info("enter update");
-		Session session = JpaHelper.createSession(entityManager, persistantClass);
-
-		session.update(entity);
-		session.getTransaction().commit();
-
+		entityManager.merge(entity);
 		LOG.info("exit update");
 	}
 
