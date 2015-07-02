@@ -16,7 +16,6 @@ public class JProjectDAO extends DaoImp<JProject> {
 
 	public JProjectDAO() {
 		super(JProject.class);
-		LOG.info("???");
 	}
 	
 	@Transactional

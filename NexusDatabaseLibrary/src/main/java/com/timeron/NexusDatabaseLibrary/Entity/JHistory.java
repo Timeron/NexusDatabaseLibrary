@@ -18,6 +18,8 @@ public class JHistory {
 	@GeneratedValue
 	private int id;
 	
+	private String message;
+	
 	private Date created;
 	
 	@ManyToOne
@@ -48,6 +50,14 @@ public class JHistory {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public Date getCreated() {

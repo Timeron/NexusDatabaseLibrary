@@ -68,7 +68,7 @@
 	<entity>
 		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.JHistory</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>206</entity-height>
+		<entity-height>226</entity-height>
 		<entity-X-Coordinate>-20</entity-X-Coordinate>
 		<entity-Y-Coordinate>-682</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
@@ -79,7 +79,7 @@
 	<entity>
 		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.JProject</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>246</entity-height>
+		<entity-height>266</entity-height>
 		<entity-X-Coordinate>-812</entity-X-Coordinate>
 		<entity-Y-Coordinate>-620</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
@@ -134,7 +134,7 @@
 	<entity>
 		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.JTask</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>346</entity-height>
+		<entity-height>386</entity-height>
 		<entity-X-Coordinate>-451</entity-X-Coordinate>
 		<entity-Y-Coordinate>-410</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
@@ -187,22 +187,22 @@
 	</entity>
 
 	<entity>
-		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.ObservedSiteHistory</entity-name>
+		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.NexusPerson</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>206</entity-height>
-		<entity-X-Coordinate>685</entity-X-Coordinate>
-		<entity-Y-Coordinate>760</entity-Y-Coordinate>
+		<entity-height>488</entity-height>
+		<entity-X-Coordinate>-950</entity-X-Coordinate>
+		<entity-Y-Coordinate>212</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
 	</entity>
 
 	<entity>
-		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.NexusPerson</entity-name>
+		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.ObservedSiteHistory</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>488</entity-height>
-		<entity-X-Coordinate>-950</entity-X-Coordinate>
-		<entity-Y-Coordinate>212</entity-Y-Coordinate>
+		<entity-height>206</entity-height>
+		<entity-X-Coordinate>685</entity-X-Coordinate>
+		<entity-Y-Coordinate>760</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
