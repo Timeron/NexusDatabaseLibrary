@@ -30,7 +30,7 @@ public class JHistory {
 	@JoinColumn(name="j_note")
 	private JNote note;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="j_status")
 	private JStatus status;
 	

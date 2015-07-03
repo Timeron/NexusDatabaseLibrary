@@ -22,8 +22,8 @@ public class JStatus {
 	@OneToMany(mappedBy="status")
 	private List<JTask> task;
 	
-	@OneToOne(mappedBy="status")
-	private JHistory history;
+	@OneToMany(mappedBy="status")
+	private List<JHistory> history;
 	
 	@OneToMany(mappedBy="status")
 	private List<JProject> project;
@@ -56,11 +56,11 @@ public class JStatus {
 		this.task = task;
 	}
 
-	public JHistory getHistory() {
+	public List<JHistory> getHistory() {
 		return history;
 	}
 
-	public void setHistory(JHistory history) {
+	public void setHistory(List<JHistory> history) {
 		this.history = history;
 	}
 
