@@ -147,7 +147,7 @@
 		<entity-width>120</entity-width>
 		<entity-height>146</entity-height>
 		<entity-X-Coordinate>-1050</entity-X-Coordinate>
-		<entity-Y-Coordinate>-570</entity-Y-Coordinate>
+		<entity-Y-Coordinate>-560</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -187,22 +187,22 @@
 	</entity>
 
 	<entity>
-		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.NexusPerson</entity-name>
+		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.ObservedSiteHistory</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>488</entity-height>
-		<entity-X-Coordinate>-950</entity-X-Coordinate>
-		<entity-Y-Coordinate>212</entity-Y-Coordinate>
+		<entity-height>206</entity-height>
+		<entity-X-Coordinate>685</entity-X-Coordinate>
+		<entity-Y-Coordinate>760</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
 	</entity>
 
 	<entity>
-		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.ObservedSiteHistory</entity-name>
+		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.NexusPerson</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>206</entity-height>
-		<entity-X-Coordinate>685</entity-X-Coordinate>
-		<entity-Y-Coordinate>760</entity-Y-Coordinate>
+		<entity-height>488</entity-height>
+		<entity-X-Coordinate>-950</entity-X-Coordinate>
+		<entity-Y-Coordinate>212</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>

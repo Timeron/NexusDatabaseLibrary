@@ -2,6 +2,7 @@ package com.timeron.NexusDatabaseLibrary.Entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class JNote {
 	
 	private String name;
 	
-	private String contant;
+	private String content;
 	
 	private Date created;
 	
@@ -28,7 +29,7 @@ public class JNote {
 	@JoinColumn(name="j_task")
 	private JTask task;
 	
-	@OneToOne(mappedBy="note")
+	@OneToOne(mappedBy="note", cascade = CascadeType.ALL )
 	private JHistory history;
 	
 	@ManyToOne
@@ -57,12 +58,12 @@ public class JNote {
 		this.name = name;
 	}
 
-	public String getContant() {
-		return contant;
+	public String getContent() {
+		return content;
 	}
 
-	public void setContant(String contant) {
-		this.contant = contant;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public Date getCreated() {

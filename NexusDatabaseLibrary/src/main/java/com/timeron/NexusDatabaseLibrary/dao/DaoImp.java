@@ -57,11 +57,12 @@ public abstract class DaoImp<T> implements DAO<T> {
 		boolean result = true;
 		try{
 			entityManager.merge(entity);
+			LOG.info("seq "+entity.toString());
 		}catch(Exception ex){
 			ex.printStackTrace();
 			result = false;
 		}finally{
-
+			entityManager.flush();
 		}
 		LOG.info("exit save");
 		return result;
@@ -179,10 +180,14 @@ public abstract class DaoImp<T> implements DAO<T> {
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally {
-
+			
 		}
 		LOG.info("exit getLastId");
 		return lastId;
 	}
-
+	
+	@Transactional
+	public void flash() {
+		entityManager.flush();
+	}
 }
