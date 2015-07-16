@@ -1,10 +1,13 @@
 package com.timeron.NexusDatabaseLibrary.Entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,10 +22,14 @@ public class JRelease {
 	@GeneratedValue
 	private int id;
 	private String version;
+	private String comment;
 	
 	@ManyToOne
 	@JoinColumn(name="j_project")
 	private JProject project;
+	
+	@OneToMany(mappedBy="release")
+	List<JTask> jTasks;
 
 	public int getId() {
 		return id;
@@ -46,6 +53,22 @@ public class JRelease {
 
 	public void setProject(JProject project) {
 		this.project = project;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public List<JTask> getjTasks() {
+		return jTasks;
+	}
+
+	public void setjTasks(List<JTask> jTasks) {
+		this.jTasks = jTasks;
 	}
 	
 	

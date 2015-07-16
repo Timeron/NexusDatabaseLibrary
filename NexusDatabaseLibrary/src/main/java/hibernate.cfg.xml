@@ -38,6 +38,7 @@
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.NexusPerson" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.NexusRole" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.NexusUser" />
+		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.NexusVersion" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.ObservedLinksPackage" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.ObservedObject" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.ObservedSite" />

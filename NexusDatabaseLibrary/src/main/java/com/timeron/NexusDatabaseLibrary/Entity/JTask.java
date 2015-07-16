@@ -57,6 +57,10 @@ public class JTask implements NexusEntity{
 	
 	@OneToOne(mappedBy="subtask")
 	private JTask mainTask;
+	
+	@ManyToOne
+	@JoinColumn(name="j_release")
+	private JRelease release;
 
 	/**
 	 * Getters & Setters
@@ -184,4 +188,17 @@ public class JTask implements NexusEntity{
 		this.updated = updated;
 	}
 
+	public JRelease getRelease() {
+		return release;
+	}
+
+	public void setRelease(JRelease release) {
+		this.release = release;
+	}
+
+	public void setPriority(Integer priority) {
+		this.priority = priority;
+	}
+
+	
 }
