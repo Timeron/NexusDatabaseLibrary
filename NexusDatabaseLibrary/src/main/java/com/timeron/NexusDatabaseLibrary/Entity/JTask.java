@@ -23,10 +23,12 @@ public class JTask implements NexusEntity{
 	@GeneratedValue
 	private int id;
 	
-	private String name;
-	private String summary;
-	private String description;
+	private String name = "";
+	private String summary = "";
+	private String description = "";
 	private Integer priority;
+	private Date endDate; 
+	private long workExpected;
 	private Date created;
 	private Date updated;
 	
@@ -200,6 +202,24 @@ public class JTask implements NexusEntity{
 	public void setPriority(Integer priority) {
 		this.priority = priority;
 	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public long getWorkExpected() {
+		return workExpected;
+	}
+
+	public void setWorkExpected(long workExpected) {
+		this.workExpected = workExpected;
+	}
+
+
 
 	
 }
