@@ -53,32 +53,26 @@ public abstract class DaoImp<T> implements DAO<T> {
 
 	@Transactional
 	public boolean save(T entity) {
-		LOG.info("enter save");
 		boolean result = true;
 		try{
 			entityManager.merge(entity);
-			LOG.info("seq "+entity.toString());
 		}catch(Exception ex){
 			ex.printStackTrace();
 			result = false;
 		}finally{
 			entityManager.flush();
 		}
-		LOG.info("exit save");
 		return result;
 	}
 
 	@Transactional
 	public void update(T entity) {
-		LOG.info("enter update");
 		entityManager.merge(entity);
-		LOG.info("exit update");
 	}
 
 	@Transactional
 	@SuppressWarnings("unchecked")
 	public void removeById(int id) {
-		LOG.info("enter removeById");
 		T result;
 
 		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
@@ -89,8 +83,6 @@ public abstract class DaoImp<T> implements DAO<T> {
 			session.delete(result);
 			session.getTransaction().commit();
 		}
-
-		LOG.info("exit removeById");
 	}
 
 	@Transactional
@@ -111,7 +103,6 @@ public abstract class DaoImp<T> implements DAO<T> {
 	@Transactional
 	@SuppressWarnings({ "unchecked", "static-access" })
 	public List<T> getAll(String orderBy, String direction, int maxResults){
-		LOG.info("enter getAll");
 		List<T> entities = new ArrayList<T>();
 
 		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
@@ -128,8 +119,6 @@ public abstract class DaoImp<T> implements DAO<T> {
 		criteria.setResultTransformer(criteria.DISTINCT_ROOT_ENTITY);
 		entities = (List<T>) criteria.list();
 		
-
-		LOG.info("exit getAll");
 		if (entities.size() > 0) {
 			return entities;
 		} else {
@@ -142,7 +131,6 @@ public abstract class DaoImp<T> implements DAO<T> {
 	@Transactional
 	@SuppressWarnings("unchecked")
 	public T getById(int id) {
-		LOG.info("enter getById");
 		T entity = null;
 		try {
 			Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
@@ -158,13 +146,11 @@ public abstract class DaoImp<T> implements DAO<T> {
 		} finally {
 
 		}
-		LOG.info("exit getById");
 		return entity;
 	}
 	
 	@Transactional
 	public int getLastId(){
-		LOG.info("enter getLastId");
 		NexusEntity entity = null;
 		int lastId = 0;
 		try {
@@ -182,7 +168,6 @@ public abstract class DaoImp<T> implements DAO<T> {
 		}finally {
 			
 		}
-		LOG.info("exit getLastId");
 		return lastId;
 	}
 	

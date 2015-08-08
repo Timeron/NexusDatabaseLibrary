@@ -1,105 +1,78 @@
 package com.timeron.NexusDatabaseLibrary.Entity;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "nexs_user")
-public class NexusUser extends NexusPerson{
+@Table(name = "nexus_user")
+public class NexusUser {
 
-	private boolean admin;
-	private boolean active;
-	
-	@OneToMany(mappedBy="userId")
-	private List<NexusApplications> userApplications;
-	
-	@OneToMany(mappedBy="userId")
-	private List<NexusRole> roles;
-	
-	@OneToMany(mappedBy="user")
-	private List<JHistory> history;
-	
-	@OneToMany(mappedBy="user")
-	private List<JTask> task;
-	
-	@OneToMany(mappedBy="user")
-	private List<JNote> note;
-	
-	@OneToMany(mappedBy="user")
-	private List<JProject> project;
-	
-	/*
-	 * Getters & setters
-	 */
-	
-	public boolean isAdmin() {
-		return admin;
+	private String username;
+	private String password;
+	private boolean enabled;
+	private Set<NexusUserRole> userRole = new HashSet<NexusUserRole>(0);
+
+	public NexusUser() {
 	}
 
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
+	public NexusUser(String username, String password, boolean enabled) {
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
 	}
 
-	public boolean isActive() {
-		return active;
+	public NexusUser(String username, String password, 
+		boolean enabled, Set<NexusUserRole> userRole) {
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.userRole = userRole;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
+	@Id
+	@Column(name = "username", unique = true, 
+		nullable = false, length = 45)
+	public String getUsername() {
+		return this.username;
 	}
 
-	public List<NexusApplications> getUserApplications() {
-		return userApplications;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public void setUserApplications(List<NexusApplications> userApplications) {
-		this.userApplications = userApplications;
+	@Column(name = "password", 
+		nullable = false, length = 60)
+	public String getPassword() {
+		return this.password;
 	}
 
-	public List<NexusRole> getRoles() {
-		return roles;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public void setRoles(List<NexusRole> roles) {
-		this.roles = roles;
+	@Column(name = "enabled", nullable = false)
+	public boolean isEnabled() {
+		return this.enabled;
 	}
 
-	public List<JHistory> getHistory() {
-		return history;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
-	public void setHistory(List<JHistory> history) {
-		this.history = history;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<NexusUserRole> getUserRole() {
+		return this.userRole;
 	}
 
-	public List<JTask> getTask() {
-		return task;
+	public void setUserRole(Set<NexusUserRole> userRole) {
+		this.userRole = userRole;
 	}
 
-	public void setTask(List<JTask> task) {
-		this.task = task;
-	}
-
-	public List<JNote> getNote() {
-		return note;
-	}
-
-	public void setNote(List<JNote> note) {
-		this.note = note;
-	}
-
-	public List<JProject> getProject() {
-		return project;
-	}
-
-	public void setProject(List<JProject> project) {
-		this.project = project;
-	}
-	
-	
-	
-	
 }

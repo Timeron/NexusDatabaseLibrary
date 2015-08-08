@@ -12,8 +12,8 @@
 		<class>com.timeron.NexusDatabaseLibrary.Entity.NexusApplications</class>
 		<class>com.timeron.NexusDatabaseLibrary.Entity.NexusConfig</class>
 		<class>com.timeron.NexusDatabaseLibrary.Entity.NexusPerson</class>
-		<class>com.timeron.NexusDatabaseLibrary.Entity.NexusRole</class>
 		<class>com.timeron.NexusDatabaseLibrary.Entity.NexusUser</class>
+		<class>com.timeron.NexusDatabaseLibrary.Entity.NexusUserRole</class>
 		<class>com.timeron.NexusDatabaseLibrary.Entity.NexusVersion</class>
 		<class>com.timeron.NexusDatabaseLibrary.Entity.ObservedLinksPackage</class>
 		<class>com.timeron.NexusDatabaseLibrary.Entity.ObservedObject</class>
