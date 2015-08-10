@@ -1,12 +1,14 @@
 package com.timeron.NexusDatabaseLibrary.Entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,7 +29,10 @@ public class NexusPerson {
 	private String lastName;
 
 	@Column(length = 30)
-	private String pseudo;
+	private String nick;
+	
+	@Column(length = 40)
+	private String nickLogo;
 
 	@Column(length = 40)
 	private String email;
@@ -70,6 +75,9 @@ public class NexusPerson {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createTimestamp;
 
+	@OneToMany(mappedBy="user")
+	private List<JTask> tasks;
+	
 	@Transient
 	private String birthdayYear;
 	@Transient
@@ -110,11 +118,11 @@ public class NexusPerson {
 	}
 
 	public String getPseudo() {
-		return pseudo;
+		return nick;
 	}
 
-	public void setPseudo(String pseudo) {
-		this.pseudo = pseudo;
+	public void setPseudo(String nick) {
+		this.nick = nick;
 	}
 
 	public String getEmail() {
@@ -252,7 +260,29 @@ public class NexusPerson {
 	public void setNameDayDay(String nameDayDay) {
 		this.nameDayDay = nameDayDay;
 	}
-	
-	
 
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	public List<JTask> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<JTask> tasks) {
+		this.tasks = tasks;
+	}
+
+	public String getNickLogo() {
+		return nickLogo;
+	}
+
+	public void setNickLogo(String nickLogo) {
+		this.nickLogo = nickLogo;
+	}
+	
 }

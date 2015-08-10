@@ -8,34 +8,34 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.timeron.NexusDatabaseLibrary.Entity.NexusUser;
+import com.timeron.NexusDatabaseLibrary.Entity.NexusPerson;
 import com.timeron.NexusDatabaseLibrary.helper.JpaHelper;
 
 @Repository
-public class NexusUserDAO extends DaoImp<NexusUser>{
+public class NexusPersonDAO extends DaoImp<NexusPerson> {
+
+	public NexusPersonDAO() {
+		super(NexusPerson.class);
+	}
 	
-	public NexusUserDAO(Class<NexusUser> persistantClass) {
+	public NexusPersonDAO(Class<NexusPerson> persistantClass) {
 		super(persistantClass);
 	}
 	
-	public NexusUserDAO() {
-		super(NexusUser.class);
-	}
-
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public NexusUser findByUserName(String username) {
+	public NexusPerson getByNick(String nick){
+		List<NexusPerson> users = new ArrayList<NexusPerson>();
 
-		List<NexusUser> users = new ArrayList<NexusUser>();
 		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
-		criteria.add(Restrictions.eq("username", username));
-		users = (List<NexusUser>) criteria.list();
+		criteria.add(Restrictions.eq("nick", nick));
+		users = (List<NexusPerson>) criteria.list();
 
 		if (users.size() > 0) {
 			return users.get(0);
 		} else {
 			return null;
 		}
-
 	}
+
 }

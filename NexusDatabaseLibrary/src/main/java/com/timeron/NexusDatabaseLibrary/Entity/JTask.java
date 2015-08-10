@@ -50,9 +50,9 @@ public class JTask implements NexusEntity{
 	@JoinColumn(name="j_status")
 	private JStatus status;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="j_user")
-	private NexusUser user;
+	private NexusPerson user;
 	
 	@OneToOne
 	@JoinColumn(name="subtask")
@@ -159,11 +159,11 @@ public class JTask implements NexusEntity{
 		this.status = status;
 	}
 
-	public NexusUser getUser() {
+	public NexusPerson getUser() {
 		return user;
 	}
 
-	public void setUser(NexusUser user) {
+	public void setUser(NexusPerson user) {
 		this.user = user;
 	}
 
