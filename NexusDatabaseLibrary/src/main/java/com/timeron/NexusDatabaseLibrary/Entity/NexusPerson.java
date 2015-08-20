@@ -78,6 +78,9 @@ public class NexusPerson {
 	@OneToMany(mappedBy="user")
 	private List<JTask> tasks;
 	
+	@OneToMany(mappedBy="user")
+	private List<WalletAccount> walletAccounts;
+	
 	@Transient
 	private String birthdayYear;
 	@Transient

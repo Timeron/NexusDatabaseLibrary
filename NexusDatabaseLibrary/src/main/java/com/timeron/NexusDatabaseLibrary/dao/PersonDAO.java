@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.timeron.NexusDatabaseLibrary.Entity.NexusPerson;
 import com.timeron.NexusDatabaseLibrary.dao.helper.PersonDaoHelper;
@@ -22,6 +23,7 @@ public class PersonDAO extends DaoImp<NexusPerson>{
 
 	static Logger log = Logger.getLogger(PersonDAO.class.getName());
 
+	@Transactional
 	@SuppressWarnings("unchecked")
 	public List<NexusPerson> searchPerson(NexusPerson nexusPerson) {
 		List<NexusPerson> nexusPersonList = new ArrayList<NexusPerson>();
@@ -42,6 +44,7 @@ public class PersonDAO extends DaoImp<NexusPerson>{
 
 	}
 
+	@Transactional
 	@SuppressWarnings("unchecked")
 	public List<NexusPerson> getAllContacts() {
 		List<NexusPerson> nexusPersonList = new ArrayList<NexusPerson>();

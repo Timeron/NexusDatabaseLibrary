@@ -3,11 +3,11 @@ package com.timeron.NexusDatabaseLibrary.Entity;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,6 +27,10 @@ public class WalletAccount {
 	private Date timestamp;
 	@DateTimeFormat(pattern = "YYYY-MM-DD HH:mm:ss.S")
 	private Date updated;
+	
+	@ManyToOne
+	@JoinColumn(name="user")
+	private NexusPerson user;
 	
 	@OneToMany(mappedBy="walletAccount")
 	private List<WalletRecord> walletRecords;
@@ -81,6 +85,12 @@ public class WalletAccount {
 	}
 	public void setUpdated(Date updated) {
 		this.updated = updated;
+	}
+	public NexusPerson getUser() {
+		return user;
+	}
+	public void setUser(NexusPerson user) {
+		this.user = user;
 	}
 	
 	
