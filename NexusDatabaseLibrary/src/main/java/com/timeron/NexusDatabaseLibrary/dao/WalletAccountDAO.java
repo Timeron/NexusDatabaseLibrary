@@ -1,5 +1,7 @@
 package com.timeron.NexusDatabaseLibrary.dao;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
@@ -57,6 +59,19 @@ public class WalletAccountDAO extends DaoImp<WalletAccount>{
 			return true;
 		}else{
 			return false;
+		}
+	}
+
+	@Transactional
+	@SuppressWarnings("unchecked")
+	public List<WalletAccount> getByUser(NexusPerson nexusPerson) {
+		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
+		criteria.add(Restrictions.eq("user", nexusPerson));
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		if(criteria.list() == null || criteria.list().isEmpty()){
+			return null;
+		}else{
+			return (List<WalletAccount>) criteria.list();
 		}
 	}
 	
