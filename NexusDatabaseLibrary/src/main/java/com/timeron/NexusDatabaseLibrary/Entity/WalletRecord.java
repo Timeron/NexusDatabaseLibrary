@@ -3,6 +3,7 @@ package com.timeron.NexusDatabaseLibrary.Entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -27,7 +28,7 @@ public class WalletRecord {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.S")
 	private Date updated;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="wallet_type")
 	private WalletType walletType;
 	@ManyToOne

@@ -3,6 +3,7 @@ package com.timeron.NexusDatabaseLibrary.Entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -54,12 +55,12 @@ public class JTask implements NexusEntity{
 	@JoinColumn(name="j_user")
 	private NexusPerson user;
 	
-	@OneToOne
-	@JoinColumn(name="subtask")
-	private JTask subtask;
-	
-	@OneToOne(mappedBy="subtask")
+	@ManyToOne(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
+	@JoinColumn(name="maintask")
 	private JTask mainTask;
+	
+	@OneToMany(mappedBy="mainTask")
+	private List<JTask> subTasks;
 	
 	@ManyToOne
 	@JoinColumn(name="j_release")
@@ -167,12 +168,12 @@ public class JTask implements NexusEntity{
 		this.user = user;
 	}
 
-	public JTask getSubtask() {
-		return subtask;
+	public List<JTask> getSubTasks() {
+		return subTasks;
 	}
 
-	public void setSubtask(JTask subtask) {
-		this.subtask = subtask;
+	public void setSubTasks(List<JTask> subTasks) {
+		this.subTasks = subTasks;
 	}
 
 	public JTask getMainTask() {

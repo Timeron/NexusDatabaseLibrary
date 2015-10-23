@@ -8,6 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.timeron.NexusDatabaseLibrary.Entity.WalletAccount;
 import com.timeron.NexusDatabaseLibrary.Entity.WalletRecord;
@@ -20,21 +21,22 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 	public WalletRecordDAO() {
 		super(WalletRecord.class);
 	}
-	
+	@Transactional
 	public List<WalletRecord> getRecordsFromAccount(WalletAccount currentAccount) {
 		int rows = 0;
 		return getRecordsFromAccount(currentAccount, null ,rows);
 	}
-	
+	@Transactional
 	public List<WalletRecord> getRecordsFromAccount(WalletAccount currentAccount, int rows) {
 		return getRecordsFromAccount(currentAccount, null ,rows);
 	}
-	
+	@Transactional
 	public List<WalletRecord> getRecordsFromAccount(WalletAccount currentAccount, String direction) {
 		int rows = 0;
 		return getRecordsFromAccount(currentAccount, direction ,rows);
 	}
 	
+	@Transactional
 	@SuppressWarnings("unchecked")
 	public List<WalletRecord> getRecordsFromAccount(WalletAccount currentAccount, String direction, int rows) {
 		List<WalletRecord> result = new ArrayList<WalletRecord>();

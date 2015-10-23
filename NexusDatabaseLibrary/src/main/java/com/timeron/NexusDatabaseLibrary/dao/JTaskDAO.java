@@ -32,6 +32,7 @@ public class JTaskDAO extends DaoImp<JTask> {
 		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 		
 		criteria.add(Restrictions.eq("project", jProject));
+		criteria.addOrder(Order.asc("priority"));
 		jTasks = (List<JTask>) criteria.list();
 		
 		LOG.info("exit getByProject");
