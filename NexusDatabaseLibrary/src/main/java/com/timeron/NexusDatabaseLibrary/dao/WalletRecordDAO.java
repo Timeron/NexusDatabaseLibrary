@@ -41,9 +41,10 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 	public List<WalletRecord> getRecordsFromAccount(WalletAccount currentAccount, String direction, int rows) {
 		List<WalletRecord> result = new ArrayList<WalletRecord>();
 		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
-		criteria = criteria.add(Restrictions.disjunction()
-						.add(Restrictions.eq("walletAccount", currentAccount))
-						.add(Restrictions.eq("destinationWalletAccount", currentAccount)));
+		criteria = criteria.add(Restrictions.eq("walletAccount", currentAccount));//disjunction()
+//						.add(Restrictions.eq("walletAccount", currentAccount)));
+//						.add(Restrictions.eq("sourceWalletAccount", currentAccount))
+//						.add(Restrictions.eq("destinationWalletAccount", currentAccount)));
 		if(direction != null){
 			if(Direction.DESC == direction){
 				criteria.addOrder(Order.desc("date"));
