@@ -24,7 +24,7 @@ public class WalletType {
 	private int id;
 	private String name;
 	@Column(name="default_value")
-	private int defaultValue;
+	private boolean defaultValue;
 	private String color;
 	private String icon;
 	@DateTimeFormat(pattern = "YYYY-MM-DD HH:mm:ss.S")
@@ -55,11 +55,11 @@ public class WalletType {
 		this.name = name;
 	}
 
-	public int getDefaultValue() {
+	public boolean getDefaultValue() {
 		return defaultValue;
 	}
 
-	public void setDefaultValue(int defaultValue) {
+	public void setDefaultValue(boolean defaultValue) {
 		this.defaultValue = defaultValue;
 	}
 
