@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,6 +53,7 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 		List<WalletRecord> result = new ArrayList<WalletRecord>();
 		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 		criteria = criteria.add(Restrictions.eq("walletAccount", currentAccount));
+		criteria = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		if(direction != null){
 			if(Direction.DESC == direction){
 				criteria.addOrder(Order.desc(orderBy));
