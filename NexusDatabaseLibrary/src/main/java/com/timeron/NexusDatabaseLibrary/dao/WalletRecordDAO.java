@@ -89,6 +89,7 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 			return emptyList;
 		}
 	}
+	
 	@SuppressWarnings("unchecked")
 	public List<WalletRecord> getRecordsFromAccountWithType(
 			WalletAccount currentAccount, boolean income) {
@@ -96,6 +97,34 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 		Query query = entityManager.createNamedQuery("GetRecordsFromAccountWithAllTypes");
 		query.setParameter("accountId", currentAccount.getId());
 		query.setParameter("income", income);
+		result = (List<WalletRecord>) query.getResultList();
+		if (result.size() > 0) {
+			return result;
+		} else {
+			List<WalletRecord> emptyList = Collections.emptyList();
+			return emptyList;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<WalletRecord> getRecordByParentType(int typeId) {
+		List<WalletRecord> result = new ArrayList<WalletRecord>();
+		Query query = entityManager.createNamedQuery("GetRecordByParentType");
+		query.setParameter("typeId", typeId);
+		result = (List<WalletRecord>) query.getResultList();
+		if (result.size() > 0) {
+			return result;
+		} else {
+			List<WalletRecord> emptyList = Collections.emptyList();
+			return emptyList;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<WalletRecord> getByType(int typeId) {
+		List<WalletRecord> result = new ArrayList<WalletRecord>();
+		Query query = entityManager.createNamedQuery("GetRecordByType");
+		query.setParameter("typeId", typeId);
 		result = (List<WalletRecord>) query.getResultList();
 		if (result.size() > 0) {
 			return result;

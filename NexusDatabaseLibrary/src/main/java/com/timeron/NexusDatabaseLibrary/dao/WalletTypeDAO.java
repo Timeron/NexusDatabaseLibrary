@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.hibernate.Criteria;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Order;
@@ -11,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.timeron.NexusDatabaseLibrary.Entity.WalletRecord;
 import com.timeron.NexusDatabaseLibrary.Entity.WalletType;
 import com.timeron.NexusDatabaseLibrary.helper.JpaHelper;
 
@@ -77,6 +80,20 @@ public class WalletTypeDAO extends DaoImp<WalletType>{
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		result = (WalletType) criteria.list().get(0);
 		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<WalletType> getChildren(int typeId) {
+		List<WalletType> result = new ArrayList<WalletType>();
+		Query query = entityManager.createNamedQuery("GetChildren");
+		query.setParameter("typeId", typeId);
+		result = (List<WalletType>) query.getResultList();
+		if (result.size() > 0) {
+			return result;
+		} else {
+			List<WalletType> emptyList = Collections.emptyList();
+			return emptyList;
+		}
 	}
 	
 	
