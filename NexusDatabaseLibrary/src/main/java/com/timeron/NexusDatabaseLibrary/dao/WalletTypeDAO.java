@@ -94,7 +94,5 @@ public class WalletTypeDAO extends DaoImp<WalletType>{
 			List<WalletType> emptyList = Collections.emptyList();
 			return emptyList;
 		}
-	}
-	
-	
+	}	
 }

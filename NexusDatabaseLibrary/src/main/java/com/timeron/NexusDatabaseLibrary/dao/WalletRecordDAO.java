@@ -134,6 +134,19 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 		}
 	}
 
-
+	@SuppressWarnings("unchecked")
+	public List<WalletRecord> getByType(int typeId, boolean income) {
+		List<WalletRecord> result = new ArrayList<WalletRecord>();
+		Query query = entityManager.createNamedQuery("GetRecordByTypeIncome");
+		query.setParameter("typeId", typeId);
+		query.setParameter("income", income);
+		result = (List<WalletRecord>) query.getResultList();
+		if (result.size() > 0) {
+			return result;
+		} else {
+			List<WalletRecord> emptyList = Collections.emptyList();
+			return emptyList;
+		}
+	}
 	
 }
