@@ -32,8 +32,11 @@ public class PersonDaoHelper {
 				&& !nexusPerson.getCountry().isEmpty()) {
 			attributes.put("country", nexusPerson.getCountry());
 		}
-		if (nexusPerson.getEmail() != null && !nexusPerson.getEmail().isEmpty()) {
-			attributes.put("email", nexusPerson.getEmail());
+		if (nexusPerson.getEmailOffice() != null && !nexusPerson.getEmailOffice().isEmpty()) {
+			attributes.put("emailOffice", nexusPerson.getEmailOffice());
+		}
+		if (nexusPerson.getEmailPrv() != null && !nexusPerson.getEmailPrv().isEmpty()) {
+			attributes.put("emailPrv", nexusPerson.getEmailPrv());
 		}
 		if (nexusPerson.getFirstName() != null
 				&& !nexusPerson.getFirstName().isEmpty()) {

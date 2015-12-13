@@ -35,7 +35,10 @@ public class NexusPerson {
 	private String nickLogo;
 
 	@Column(length = 40)
-	private String email;
+	private String emailPrv;
+	
+	@Column(length = 40)
+	private String emailOffice;
 
 	@Column(length = 40)
 	private String city;
@@ -57,6 +60,9 @@ public class NexusPerson {
 
 	@Lob
 	private String description;
+	
+	@Column(length = 255)
+	private String tags;
 
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
@@ -128,12 +134,12 @@ public class NexusPerson {
 		this.nick = nick;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getEmailPrv() {
+		return emailPrv;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmailPrv(String emailPrv) {
+		this.emailPrv = emailPrv;
 	}
 
 	public String getCity() {
@@ -287,5 +293,22 @@ public class NexusPerson {
 	public void setNickLogo(String nickLogo) {
 		this.nickLogo = nickLogo;
 	}
+
+	public String getEmailOffice() {
+		return emailOffice;
+	}
+
+	public void setEmailOffice(String emailOffice) {
+		this.emailOffice = emailOffice;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+	
 	
 }
