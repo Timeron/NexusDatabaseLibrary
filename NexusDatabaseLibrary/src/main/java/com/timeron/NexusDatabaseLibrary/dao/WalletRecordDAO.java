@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.timeron.NexusDatabaseLibrary.Entity.WalletAccount;
 import com.timeron.NexusDatabaseLibrary.Entity.WalletRecord;
+import com.timeron.NexusDatabaseLibrary.Entity.WalletType;
 import com.timeron.NexusDatabaseLibrary.dao.Enum.Direction;
 import com.timeron.NexusDatabaseLibrary.helper.JpaHelper;
 
@@ -91,7 +92,7 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<WalletRecord> getRecordsFromAccountWithType(
+	public List<WalletRecord> getRecordsFromAccountWithAllTypes(
 			WalletAccount currentAccount, boolean income) {
 		List<WalletRecord> result = new ArrayList<WalletRecord>();
 		Query query = entityManager.createNamedQuery("GetRecordsFromAccountWithAllTypes");
@@ -139,6 +140,20 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 		List<WalletRecord> result = new ArrayList<WalletRecord>();
 		Query query = entityManager.createNamedQuery("GetRecordByTypeIncome");
 		query.setParameter("typeId", typeId);
+		query.setParameter("income", income);
+		result = (List<WalletRecord>) query.getResultList();
+		if (result.size() > 0) {
+			return result;
+		} else {
+			List<WalletRecord> emptyList = Collections.emptyList();
+			return emptyList;
+		}
+	}
+	public List<WalletRecord> getRecordsFromAccountWithType(WalletAccount account, WalletType type, boolean income) {
+		List<WalletRecord> result = new ArrayList<WalletRecord>();
+		Query query = entityManager.createNamedQuery("GetRecordsFromAccountWithType");
+		query.setParameter("accountId", account.getId());
+		query.setParameter("typeId", type.getId());
 		query.setParameter("income", income);
 		result = (List<WalletRecord>) query.getResultList();
 		if (result.size() > 0) {
