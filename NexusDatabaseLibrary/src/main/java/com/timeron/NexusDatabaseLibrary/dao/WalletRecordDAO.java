@@ -3,6 +3,7 @@ package com.timeron.NexusDatabaseLibrary.dao;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -169,18 +170,18 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 	}
 	
 	public List<WalletRecord> getRecordsFromAccountWithType(WalletAccount account, WalletType type, boolean income,
-			DateTime from, DateTime to) {
-		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-		String fromDate = format.print(from);
-		String toDate = format.print(to);
+			Date from, Date to) {
+//		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+//		String fromDate = format.print(from);
+//		String toDate = format.print(to);
 		
 		List<WalletRecord> result = new ArrayList<WalletRecord>();
 		Query query = entityManager.createNamedQuery("GetRecordsFromAccountWithTypeFromTo");
 		query.setParameter("accountId", account.getId());
 		query.setParameter("typeId", type.getId());
 		query.setParameter("income", income);
-		query.setParameter("from", fromDate);
-		query.setParameter("to", toDate);
+		query.setParameter("from", from);
+		query.setParameter("to", to);
 		result = (List<WalletRecord>) query.getResultList();
 		if (result.size() > 0) {
 			return result;
