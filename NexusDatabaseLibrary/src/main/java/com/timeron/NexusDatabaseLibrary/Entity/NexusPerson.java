@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -86,6 +87,9 @@ public class NexusPerson {
 	
 	@OneToMany(mappedBy="user")
 	private List<WalletAccount> walletAccounts;
+	
+	@ManyToMany(mappedBy="contacts")
+	private List<ContactEvent> event;
 	
 	@Transient
 	private String birthdayYear;
