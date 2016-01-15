@@ -2,13 +2,17 @@ package com.timeron.NexusDatabaseLibrary.Entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="j_history")
@@ -18,6 +22,7 @@ public class JHistory {
 	@GeneratedValue
 	private int id;
 	
+	@Type(type="text")
 	private String message;
 	
 	private Date created;
