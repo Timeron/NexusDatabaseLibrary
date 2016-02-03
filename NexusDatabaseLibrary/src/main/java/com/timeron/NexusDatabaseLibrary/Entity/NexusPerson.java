@@ -15,6 +15,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.joda.time.DateTime;
+
 @Entity
 @Table(name = "nexus_person")
 public class NexusPerson {
@@ -202,6 +204,14 @@ public class NexusPerson {
 		this.description = description;
 	}
 
+	public DateTime getBirthdayJoda() {
+		return new DateTime(birthday);
+	}
+
+	public void setBirthdayJoda(DateTime birthday) {
+		this.birthday = new Date(birthday.getMillis());
+	}
+	
 	public Date getBirthday() {
 		return birthday;
 	}
@@ -210,6 +220,14 @@ public class NexusPerson {
 		this.birthday = birthday;
 	}
 
+	public DateTime getNameDayJoda() {
+		return new DateTime(nameDay);
+	}
+
+	public void setNameDay(DateTime nameDay) {
+		this.nameDay = new Date(nameDay.getMillis());
+	}
+	
 	public Date getNameDay() {
 		return nameDay;
 	}
@@ -226,6 +244,14 @@ public class NexusPerson {
 		this.updateTimestamp = updateTimestamp;
 	}
 
+	public DateTime getCreateTimestampJoda() {
+		return new DateTime(createTimestamp);
+	}
+	
+	public void setCreateTimestampJoda(DateTime createTimestamp) {
+		this.createTimestamp = new Date(createTimestamp.getMillis());
+	}
+	
 	public Date getCreateTimestamp() {
 		return createTimestamp;
 	}

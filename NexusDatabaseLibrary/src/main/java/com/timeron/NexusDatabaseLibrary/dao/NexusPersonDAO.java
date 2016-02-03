@@ -1,9 +1,11 @@
 package com.timeron.NexusDatabaseLibrary.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +38,27 @@ public class NexusPersonDAO extends DaoImp<NexusPerson> {
 		} else {
 			return null;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<NexusPerson> getAllWithEvent() {
+		List<NexusPerson> users = new ArrayList<NexusPerson>();
+
+		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
+		
+		Criterion birthDay = Restrictions.isNotNull("birthday");
+		Criterion nameDay = Restrictions.isNotNull("nameDay");
+		
+		criteria.add(Restrictions.or(birthDay, nameDay));
+		users = (List<NexusPerson>) criteria.list();
+
+		if (users.size() > 0) {
+			return users;
+		} else {
+			return Collections.emptyList();
+		}
+		
 	}
 
 }
