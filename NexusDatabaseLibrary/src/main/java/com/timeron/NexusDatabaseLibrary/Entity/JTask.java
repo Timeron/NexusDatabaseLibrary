@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.timeron.NexusDatabaseLibrary.Entity.Interface.NexusEntity;
@@ -25,6 +24,7 @@ public class JTask implements NexusEntity{
 	private int id;
 	
 	private String name = "";
+	private int idFromName = 0;
 	private String summary = "";
 	private String description = "";
 	private Integer priority;
@@ -218,6 +218,14 @@ public class JTask implements NexusEntity{
 
 	public void setWorkExpected(long workExpected) {
 		this.workExpected = workExpected;
+	}
+
+	public int getIdFromName() {
+		return idFromName;
+	}
+
+	public void setIdFromName(int idFromName) {
+		this.idFromName = idFromName;
 	}
 
 

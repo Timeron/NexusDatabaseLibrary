@@ -81,28 +81,26 @@ public class JTaskDAO extends DaoImp<JTask> {
 	}
 	
 	@Transactional
-	public String getLastName(JProject project){
+	public JTask getLastName(JProject project){
 		LOG.info("enter getLastId");
-		JTask entity = null;
-		String lastName = "";
+		JTask task = null;
 		try {
 			Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 			criteria.add(Restrictions.eq("project", project));
-			criteria.addOrder(Order.desc("id"));
+			criteria.addOrder(Order.desc("idFromName"));
 			criteria.setMaxResults(1);
 			if(criteria.list().size() > 0){
-				entity = (JTask) criteria.list().get(0);
-				lastName = entity.getName();
+				task = (JTask) criteria.list().get(0);
 			}else{
-				lastName = "";
+				task = null;
 			}
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally {
 
 		}
-		LOG.info("exit getLastId");
-		return lastName;
+		LOG.info("exit getLastTask");
+		return task;
 	}
 	
 
