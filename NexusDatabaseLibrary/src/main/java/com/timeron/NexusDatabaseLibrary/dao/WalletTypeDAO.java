@@ -13,8 +13,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.timeron.NexusDatabaseLibrary.Entity.WalletRecord;
 import com.timeron.NexusDatabaseLibrary.Entity.WalletType;
+import com.timeron.NexusDatabaseLibrary.dto.IdOrderDTO;
 import com.timeron.NexusDatabaseLibrary.helper.JpaHelper;
 
 @Repository
@@ -92,6 +92,24 @@ public class WalletTypeDAO extends DaoImp<WalletType>{
 			return result;
 		} else {
 			List<WalletType> emptyList = Collections.emptyList();
+			return emptyList;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<IdOrderDTO> getIdOrder() {
+		List<IdOrderDTO> orderResult = new ArrayList<IdOrderDTO>();
+		Query query = entityManager.createNamedQuery("GetIdOrderForTypes");
+		List<Object[]> result = query.getResultList();
+		if (result.size() > 0) {
+			for(Object[] entry : result){
+				if(entry[0] != null){
+					orderResult.add(new IdOrderDTO((Integer)entry[0], (Long)entry[1]));
+				}
+			}
+			return orderResult;
+		} else {
+			List<IdOrderDTO> emptyList = Collections.emptyList();
 			return emptyList;
 		}
 	}	

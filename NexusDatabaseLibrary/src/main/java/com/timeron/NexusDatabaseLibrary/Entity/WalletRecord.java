@@ -16,6 +16,29 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name="wallet_record")
 public class WalletRecord {
 	
+	public WalletRecord(){
+		super();
+	}
+	
+	public WalletRecord(Integer id, float value, String description,
+			boolean income, boolean transfer, Date date, Date updated,
+			WalletType walletType, WalletAccount walletAccount,
+			WalletAccount destinationWalletAccount,
+			WalletAccount sourceWalletAccount) {
+		super();
+		this.id = id;
+		this.value = value;
+		this.description = description;
+		this.income = income;
+		this.transfer = transfer;
+		this.date = date;
+		this.updated = updated;
+		this.walletType = walletType;
+		this.walletAccount = walletAccount;
+		this.destinationWalletAccount = destinationWalletAccount;
+		this.sourceWalletAccount = sourceWalletAccount;
+	}
+	
 	@Id
 	@GeneratedValue
 	private Integer id;
