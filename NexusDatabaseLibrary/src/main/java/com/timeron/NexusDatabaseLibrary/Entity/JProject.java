@@ -31,11 +31,11 @@ public class JProject {
 	private List<JRelease> releases;
 	
 	@ManyToOne
-	@JoinColumn(name="status")
+	@JoinColumn(name="status", nullable = true)
 	private JStatus status;
 	
 	@ManyToOne
-	@JoinColumn(name="autor")
+	@JoinColumn(name="autor", nullable = true)
 	private NexusUser user;
 
 	/**
