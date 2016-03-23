@@ -11,9 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.timeron.NexusDatabaseLibrary.Entity.Interface.NexusEntity;
+
 @Entity
 @Table(name="j_Note")
-public class JNote {
+public class JNote implements NexusEntity{
 
 	@Id
 	@GeneratedValue
@@ -26,14 +28,14 @@ public class JNote {
 	private Date created;
 	
 	@ManyToOne
-	@JoinColumn(name="j_task")
+	@JoinColumn(name="j_task", nullable = false)
 	private JTask task;
 	
 	@OneToOne(mappedBy="note", cascade = CascadeType.ALL )
 	private JHistory history;
 	
 	@ManyToOne
-	@JoinColumn(name="j_user")
+	@JoinColumn(name="j_user", nullable = true)
 	private NexusUser user;
 
 	/**
@@ -42,7 +44,7 @@ public class JNote {
 	
 	
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

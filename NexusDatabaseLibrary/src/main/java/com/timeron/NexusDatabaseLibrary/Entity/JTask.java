@@ -21,7 +21,7 @@ public class JTask implements NexusEntity{
 	
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	private String name = "";
 	private int idFromName = 0;
@@ -44,39 +44,37 @@ public class JTask implements NexusEntity{
 	private List<JNote> notes;
 	
 	@ManyToOne
-	@JoinColumn(name="j_project")
+	@JoinColumn(name="j_project", nullable = false)
 	private JProject project;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="j_status")
+	@JoinColumn(name="j_status", nullable = false)
 	private JStatus status;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="j_user")
+	@JoinColumn(name="j_user", nullable = false)
 	private NexusPerson user;
 	
 	@ManyToOne(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
-	@JoinColumn(name="maintask")
+	@JoinColumn(name="maintask", nullable = true)
 	private JTask mainTask;
 	
 	@OneToMany(mappedBy="mainTask")
 	private List<JTask> subTasks;
 	
 	@ManyToOne
-	@JoinColumn(name="j_release")
+	@JoinColumn(name="j_release", nullable = true)
 	private JRelease release;
 
 	/**
 	 * Getters & Setters
 	 */
 	
-	
-	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

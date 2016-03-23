@@ -2,12 +2,10 @@ package com.timeron.NexusDatabaseLibrary.Entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -28,19 +26,19 @@ public class JHistory {
 	private Date created;
 	
 	@ManyToOne
-	@JoinColumn(name="j_task")
+	@JoinColumn(name="j_task", nullable = true)
 	private JTask task;
 	
 	@OneToOne
-	@JoinColumn(name="j_note")
+	@JoinColumn(name="j_note", nullable = true)
 	private JNote note;
 	
 	@ManyToOne
-	@JoinColumn(name="j_status")
+	@JoinColumn(name="j_status", nullable = true)
 	private JStatus status;
 	
 	@ManyToOne
-	@JoinColumn(name="j_user")
+	@JoinColumn(name="j_user", nullable = true)
 	private NexusUser user;
 
 	/**

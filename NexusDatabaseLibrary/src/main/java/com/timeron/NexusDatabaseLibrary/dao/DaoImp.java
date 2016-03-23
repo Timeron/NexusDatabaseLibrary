@@ -149,16 +149,17 @@ public abstract class DaoImp<T> implements DAO<T> {
 		return entity;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Transactional
-	public int getLastId(){
-		NexusEntity entity = null;
-		int lastId = 0;
+	public <T extends NexusEntity> Integer getLastId(){
+		T entity = null;
+		Integer lastId = 0;
 		try {
 			Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 			criteria.addOrder(Order.desc("id"));
 			criteria.setMaxResults(1);
 			if(criteria.list().size() > 0){
-				entity = (NexusEntity) criteria.list().get(0);
+				entity = (T) criteria.list().get(0);
 				lastId = entity.getId();
 			}else{
 				lastId = 0;
