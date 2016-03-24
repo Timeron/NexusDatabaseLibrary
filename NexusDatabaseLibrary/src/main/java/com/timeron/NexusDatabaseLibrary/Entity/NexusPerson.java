@@ -93,9 +93,6 @@ public class NexusPerson {
 	@ManyToMany(mappedBy="contacts")
 	private List<ContactEvent> event;
 	
-	@OneToMany(mappedBy="user")
-	private List<JProject> projects;
-	
 	@Transient
 	private String birthdayYear;
 	@Transient
