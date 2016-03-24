@@ -36,7 +36,7 @@ public class JProject {
 	
 	@ManyToOne
 	@JoinColumn(name="autor", nullable = true)
-	private NexusUser user;
+	private NexusPerson user;
 
 	/**
 	 * Getters & Setters
@@ -92,11 +92,11 @@ public class JProject {
 		this.status = status;
 	}
 
-	public NexusUser getUser() {
+	public NexusPerson getUser() {
 		return user;
 	}
 
-	public void setUser(NexusUser user) {
+	public void setUser(NexusPerson user) {
 		this.user = user;
 	}
 
