@@ -90,6 +90,9 @@ public class NexusPerson {
 	@OneToMany(mappedBy="user")
 	private List<WalletAccount> walletAccounts;
 	
+	@OneToMany(mappedBy="user")
+	private List<JProject> project;
+	
 	@ManyToMany(mappedBy="contacts")
 	private List<ContactEvent> event;
 	
