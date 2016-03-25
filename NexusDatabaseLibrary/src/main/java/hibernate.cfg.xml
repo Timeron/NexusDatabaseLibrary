@@ -34,6 +34,7 @@
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.JTask" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.JTaskType" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.JRelease" />
+		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.JUserProject" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.NexusApplications" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.NexusConfig" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.NexusPerson" />
