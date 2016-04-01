@@ -1,5 +1,8 @@
 package com.timeron.NexusDatabaseLibrary.dao;
 
+import java.security.Principal;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;

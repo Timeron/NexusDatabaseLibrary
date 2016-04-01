@@ -149,6 +149,27 @@ public abstract class DaoImp<T> implements DAO<T> {
 		return entity;
 	}
 	
+	@Transactional
+	@SuppressWarnings("unchecked")
+	public List<T> getByIdInList(List<Integer> ids) {
+		List<T> entity = new ArrayList<T>();
+		try {
+			Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
+			
+			criteria.add(Restrictions.in("id", ids.toArray()));
+			if(criteria.list().size()>0){
+				entity = (List<T>) criteria.list().get(0);
+			}else{
+				return Collections.emptyList();
+			}
+		} catch (HibernateException ex) {
+			ex.printStackTrace();
+		} finally {
+
+		}
+		return entity;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public <T extends NexusEntity> Integer getLastId(){
