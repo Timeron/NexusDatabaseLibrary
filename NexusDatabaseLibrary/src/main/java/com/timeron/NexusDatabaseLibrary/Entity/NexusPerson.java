@@ -99,6 +99,9 @@ public class NexusPerson {
 	@OneToMany(mappedBy="user")
 	private List<JUserProject> userProjects;
 	
+	@OneToMany(mappedBy="user")
+	private List<NexusUserApplicationRef> userApplications;
+	
 	@Transient
 	private String birthdayYear;
 	@Transient
@@ -344,6 +347,46 @@ public class NexusPerson {
 
 	public void setTags(String tags) {
 		this.tags = tags;
+	}
+
+	public List<WalletAccount> getWalletAccounts() {
+		return walletAccounts;
+	}
+
+	public void setWalletAccounts(List<WalletAccount> walletAccounts) {
+		this.walletAccounts = walletAccounts;
+	}
+
+	public List<JProject> getProject() {
+		return project;
+	}
+
+	public void setProject(List<JProject> project) {
+		this.project = project;
+	}
+
+	public List<ContactEvent> getEvent() {
+		return event;
+	}
+
+	public void setEvent(List<ContactEvent> event) {
+		this.event = event;
+	}
+
+	public List<JUserProject> getUserProjects() {
+		return userProjects;
+	}
+
+	public void setUserProjects(List<JUserProject> userProjects) {
+		this.userProjects = userProjects;
+	}
+
+	public List<NexusUserApplicationRef> getUserApplications() {
+		return userApplications;
+	}
+
+	public void setUserApplications(List<NexusUserApplicationRef> userApplications) {
+		this.userApplications = userApplications;
 	}
 	
 	

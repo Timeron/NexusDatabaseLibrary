@@ -1,6 +1,7 @@
 package com.timeron.NexusDatabaseLibrary.dao;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.timeron.NexusDatabaseLibrary.Entity.JProject;
+import com.timeron.NexusDatabaseLibrary.Entity.NexusPerson;
 import com.timeron.NexusDatabaseLibrary.helper.JpaHelper;
 
 @Repository
@@ -20,39 +22,41 @@ public class JProjectDAO extends DaoImp<JProject> {
 	public JProjectDAO() {
 		super(JProject.class);
 	}
-	
+
 	@Transactional
-	public JProject getByDescription(String description){
+	public JProject getByDescription(String description) {
 		LOG.info("enter getByDescription");
 		JProject jProject = new JProject();
 
-		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
+		Criteria criteria = JpaHelper.createCriteria(entityManager,
+				persistantClass);
 		criteria.add(Restrictions.eq("description", description));
-		if(criteria.list().size() > 0){
+		if (criteria.list().size() > 0) {
 			jProject = (JProject) criteria.list().get(0);
-		}else{
+		} else {
 			jProject = null;
 		}
 
 		LOG.info("exit getByDescription");
 		return jProject;
 	}
-	
+
 	@Transactional
-	public JProject getByName(String name){
+	public JProject getByName(String name) {
 		LOG.info("enter getByName");
 		JProject jProject = new JProject();
-		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
-		
+		Criteria criteria = JpaHelper.createCriteria(entityManager,
+				persistantClass);
+
 		criteria.add(Restrictions.eq("name", name));
-		if(criteria.list().size() > 0){
+		if (criteria.list().size() > 0) {
 			jProject = (JProject) criteria.list().get(0);
-		}else{
+		} else {
 			jProject = null;
 		}
 
 		LOG.info("exit getByName");
 		return jProject;
 	}
-	
+
 }

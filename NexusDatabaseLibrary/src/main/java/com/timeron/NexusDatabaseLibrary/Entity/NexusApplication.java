@@ -1,20 +1,20 @@
 package com.timeron.NexusDatabaseLibrary.Entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="nexus_applications")
-public class NexusApplications {
+@Table(name="nexus_application")
+public class NexusApplication {
 
 	@Id
 	@GeneratedValue
@@ -38,9 +38,8 @@ public class NexusApplications {
 	@Temporal (TemporalType.TIMESTAMP)
 	private Date createTimestamp;
 	
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	private NexusUser userId;
+	@OneToMany(mappedBy="application")
+	private List<NexusUserApplicationRef> userApplications;
 	
 	/*
 	 * getters & setters
@@ -94,12 +93,12 @@ public class NexusApplications {
 		this.createTimestamp = createTimestamp;
 	}
 
-	public NexusUser getUserId() {
-		return userId;
+	public List<NexusUserApplicationRef> getUserApplications() {
+		return userApplications;
 	}
 
-	public void setUserId(NexusUser userId) {
-		this.userId = userId;
+	public void setUserApplications(List<NexusUserApplicationRef> userApplications) {
+		this.userApplications = userApplications;
 	}
 	
 	
