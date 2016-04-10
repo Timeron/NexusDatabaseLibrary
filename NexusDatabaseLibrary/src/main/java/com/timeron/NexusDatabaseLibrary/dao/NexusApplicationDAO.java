@@ -29,4 +29,14 @@ public class NexusApplicationDAO extends DaoImp<NexusApplication>{
 		return app;
 	}
 
+	@Transactional
+	public NexusApplication getByKey(String appKey) {
+		NexusApplication app = new NexusApplication();
+		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
+		criteria.add(Restrictions.eq("appKey", appKey));
+		app = (NexusApplication) criteria.list().get(0);
+
+		return app;
+	}
+
 }
