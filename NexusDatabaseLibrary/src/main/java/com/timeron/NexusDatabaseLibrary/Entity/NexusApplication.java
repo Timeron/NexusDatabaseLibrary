@@ -26,14 +26,15 @@ public class NexusApplication {
 	@Column(name="application_description")
 	private String applicationDescription;
 	
+	@Column(name="app_key", length = 20)
+	private String appKey;
+	
 	private boolean deployed;
 	
-	@GeneratedValue
 	@Column(name = "updat_timestamp")
 	@Temporal (TemporalType.TIMESTAMP)
 	private Date updateTimestamp;
 	
-	@GeneratedValue
 	@Column(name = "timestamp")
 	@Temporal (TemporalType.TIMESTAMP)
 	private Date createTimestamp;
@@ -100,6 +101,13 @@ public class NexusApplication {
 	public void setUserApplications(List<NexusUserApplicationRef> userApplications) {
 		this.userApplications = userApplications;
 	}
-	
+
+	public String getAppKey() {
+		return appKey;
+	}
+
+	public void setAppKey(String appKey) {
+		this.appKey = appKey;
+	}
 	
 }
