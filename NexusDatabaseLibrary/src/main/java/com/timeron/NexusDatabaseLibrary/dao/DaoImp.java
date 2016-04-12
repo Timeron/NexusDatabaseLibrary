@@ -80,8 +80,13 @@ public abstract class DaoImp<T> implements DAO<T> {
 		if(criteria.list().size() > 0){
 			Session session = JpaHelper.createSession(entityManager, persistantClass);
 			result = (T) criteria.list().get(0);
-			session.delete(result);
-			session.getTransaction().commit();
+			try{
+				entityManager.remove(result);
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}finally{
+				entityManager.flush();
+			}
 		}
 	}
 

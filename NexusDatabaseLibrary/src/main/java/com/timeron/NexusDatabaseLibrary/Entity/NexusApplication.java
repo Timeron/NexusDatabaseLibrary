@@ -3,6 +3,7 @@ package com.timeron.NexusDatabaseLibrary.Entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,7 +40,7 @@ public class NexusApplication {
 	@Temporal (TemporalType.TIMESTAMP)
 	private Date createTimestamp;
 	
-	@OneToMany(mappedBy="application")
+	@OneToMany(mappedBy="application", cascade = { CascadeType.REMOVE })
 	private List<NexusUserApplicationRef> userApplications;
 	
 	/*
