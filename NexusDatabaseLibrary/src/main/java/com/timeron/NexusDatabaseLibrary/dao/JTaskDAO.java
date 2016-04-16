@@ -1,5 +1,7 @@
 package com.timeron.NexusDatabaseLibrary.dao;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -101,6 +103,25 @@ public class JTaskDAO extends DaoImp<JTask> {
 		}
 		LOG.info("exit getLastTask");
 		return task;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<JTask> getByMainTask(JTask mainTask) {
+		List<JTask> tasks = new ArrayList<JTask>();
+		try {
+			Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
+			criteria.add(Restrictions.eq("mainTask", mainTask));
+			criteria.addOrder(Order.desc("idFromName"));
+			if(criteria.list().size() > 0){
+				tasks = (List<JTask>) criteria.list();
+			}else{
+				tasks = Collections.emptyList();
+			}
+		} catch (HibernateException ex) {
+			ex.printStackTrace();
+		}
+		return tasks;
 	}
 	
 
