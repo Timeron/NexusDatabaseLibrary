@@ -59,8 +59,6 @@ public abstract class DaoImp<T> implements DAO<T> {
 		}catch(Exception ex){
 			ex.printStackTrace();
 			result = false;
-		}finally{
-			entityManager.flush();
 		}
 		return result;
 	}
