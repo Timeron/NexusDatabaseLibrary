@@ -1,9 +1,5 @@
 package com.timeron.NexusDatabaseLibrary.dao;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -11,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.timeron.NexusDatabaseLibrary.Entity.JProject;
-import com.timeron.NexusDatabaseLibrary.Entity.NexusPerson;
 import com.timeron.NexusDatabaseLibrary.helper.JpaHelper;
 
 @Repository
