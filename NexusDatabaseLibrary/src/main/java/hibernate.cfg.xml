@@ -46,6 +46,7 @@
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.ObservedObject" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.ObservedSite" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.ObservedSiteHistory" />
+		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.Product" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.ProductCategory" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.ProposedProductKay" />
 		<mapping class="com.timeron.NexusDatabaseLibrary.Entity.Site" />
