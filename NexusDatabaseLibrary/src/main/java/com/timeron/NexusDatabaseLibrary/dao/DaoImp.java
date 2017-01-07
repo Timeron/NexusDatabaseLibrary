@@ -133,7 +133,7 @@ public abstract class DaoImp<T> implements DAO<T> {
 
 	@Transactional
 	@SuppressWarnings("unchecked")
-	public T getById(int id) {
+	public T getById(Object id) {
 		T entity = null;
 		try {
 			Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
@@ -149,12 +149,15 @@ public abstract class DaoImp<T> implements DAO<T> {
 		} finally {
 
 		}
+		if(entity == null){
+			LOG.warn(persistantClass.getCanonicalName() + " - can not get value by id: "+id.toString());
+		}
 		return entity;
 	}
 	
 	@Transactional
 	@SuppressWarnings("unchecked")
-	public List<T> getByIdInList(List<Integer> ids) {
+	public List<T> getByIdInList(List<Object> ids) {
 		List<T> entity = new ArrayList<T>();
 		try {
 			Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
@@ -169,6 +172,10 @@ public abstract class DaoImp<T> implements DAO<T> {
 			ex.printStackTrace();
 		} finally {
 
+		}
+		if(entity.isEmpty()){
+			LOG.warn(persistantClass.getCanonicalName() + " - can not get value by ids: "+ids.toString());
+			return Collections.emptyList();
 		}
 		return entity;
 	}

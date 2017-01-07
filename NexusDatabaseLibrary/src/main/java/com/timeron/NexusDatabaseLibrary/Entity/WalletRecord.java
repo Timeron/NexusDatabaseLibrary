@@ -12,9 +12,11 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.timeron.NexusDatabaseLibrary.Entity.Interface.NexusEntity;
+
 @Entity
 @Table(name="wallet_record")
-public class WalletRecord {
+public class WalletRecord implements NexusEntity {
 	
 	public WalletRecord(){
 		super();
@@ -44,8 +46,8 @@ public class WalletRecord {
 	private Integer id;
 	private float value;
 	private String description;
-	private boolean income;
-	private boolean transfer;
+	private boolean income = false;
+	private boolean transfer = false;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.S")
 	private Date date;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.S")
@@ -130,4 +132,6 @@ public class WalletRecord {
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
+	
+	
 }

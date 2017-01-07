@@ -23,6 +23,10 @@ public class WalletTypeDAO extends DaoImp<WalletType>{
 	public WalletTypeDAO() {
 		super(WalletType.class);
 	}
+	
+	public WalletTypeDAO(Class<WalletType> persistantClass) {
+		super(persistantClass);
+	}
 
 	@Transactional
 	@SuppressWarnings("unchecked")

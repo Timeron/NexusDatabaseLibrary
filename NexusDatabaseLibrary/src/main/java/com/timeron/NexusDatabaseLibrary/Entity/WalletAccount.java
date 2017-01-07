@@ -29,8 +29,8 @@ public class WalletAccount {
 	private Date updated;
 	
 	@ManyToOne
-	@JoinColumn(name="user")
-	private NexusPerson user;
+	@JoinColumn(name="owner")
+	private NexusPerson owner;
 	
 	@OneToMany(mappedBy="walletAccount")
 	private List<WalletRecord> walletRecords;
@@ -86,16 +86,31 @@ public class WalletAccount {
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-	public NexusPerson getUser() {
-		return user;
+	public NexusPerson getOwner() {
+		return owner;
 	}
-	public void setUser(NexusPerson user) {
-		this.user = user;
+	public void setOwner(NexusPerson owner) {
+		this.owner = owner;
 	}
-	
-	
-	
-	
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		WalletAccount other = (WalletAccount) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 	
 }

@@ -88,7 +88,7 @@ public class NexusPerson {
 	@OneToMany(mappedBy="user")
 	private List<JTask> tasks;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="owner")
 	private List<WalletAccount> walletAccounts;
 	
 	@OneToMany(mappedBy="user")

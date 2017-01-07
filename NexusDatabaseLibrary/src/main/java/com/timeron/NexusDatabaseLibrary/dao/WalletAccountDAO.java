@@ -19,6 +19,10 @@ public class WalletAccountDAO extends DaoImp<WalletAccount>{
 		super(WalletAccount.class);
 	}
 	
+	public WalletAccountDAO(Class<WalletAccount> persistantClass) {
+		super(persistantClass);
+	}
+	
 	@Transactional
 	@SuppressWarnings("static-access")
 	public WalletAccount getByName(String name){
@@ -52,7 +56,7 @@ public class WalletAccountDAO extends DaoImp<WalletAccount>{
 	public boolean checkIfNameIsAvailable(String name, NexusPerson nexusPerson) {
 		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 		criteria.add(Restrictions.eq("name", name));
-		criteria.add(Restrictions.eq("user", nexusPerson));
+		criteria.add(Restrictions.eq("owner", nexusPerson));
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		
 		if(criteria.list() == null || criteria.list().isEmpty()){
@@ -66,12 +70,13 @@ public class WalletAccountDAO extends DaoImp<WalletAccount>{
 	@SuppressWarnings("unchecked")
 	public List<WalletAccount> getByUser(NexusPerson nexusPerson) {
 		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
-		criteria.add(Restrictions.eq("user", nexusPerson));
+		criteria.add(Restrictions.eq("owner", nexusPerson));
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		if(criteria.list() == null || criteria.list().isEmpty()){
+		List<WalletAccount> result = (List<WalletAccount>) criteria.list();
+		if(result == null || result.isEmpty()){
 			return null;
 		}else{
-			return (List<WalletAccount>) criteria.list();
+			return result;
 		}
 	}
 	

@@ -1,6 +1,5 @@
 package com.timeron.NexusDatabaseLibrary.dao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -10,11 +9,7 @@ import javax.persistence.Query;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +25,11 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 	public WalletRecordDAO() {
 		super(WalletRecord.class);
 	}
+	
+	public WalletRecordDAO(Class<WalletRecord> persistantClass) {
+		super(persistantClass);
+	}
+	
 	@Transactional
 	public List<WalletRecord> getRecordsFromAccount(WalletAccount currentAccount) {
 		int rows = 0;
@@ -154,6 +154,8 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 			return emptyList;
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
 	public List<WalletRecord> getRecordsFromAccountWithType(WalletAccount account, WalletType type, boolean income) {
 		List<WalletRecord> result = new ArrayList<WalletRecord>();
 		Query query = entityManager.createNamedQuery("GetRecordsFromAccountWithType");
@@ -169,11 +171,9 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<WalletRecord> getRecordsFromAccountWithType(WalletAccount account, WalletType type, boolean income,
 			Date from, Date to) {
-//		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-//		String fromDate = format.print(from);
-//		String toDate = format.print(to);
 		
 		List<WalletRecord> result = new ArrayList<WalletRecord>();
 		Query query = entityManager.createNamedQuery("GetRecordsFromAccountWithTypeFromTo");
@@ -189,6 +189,12 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 			List<WalletRecord> emptyList = Collections.emptyList();
 			return emptyList;
 		}
+	}
+
+	@Transactional
+	public void saveTransfer(WalletRecord walletRecord, WalletRecord walletTransferRecord) {
+		save(walletRecord);
+		save(walletTransferRecord);
 	}
 	
 }

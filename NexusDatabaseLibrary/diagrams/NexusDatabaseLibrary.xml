@@ -36,8 +36,8 @@
 		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.NexusApplication</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>246</entity-height>
-		<entity-X-Coordinate>-891</entity-X-Coordinate>
-		<entity-Y-Coordinate>918</entity-Y-Coordinate>
+		<entity-X-Coordinate>-860</entity-X-Coordinate>
+		<entity-Y-Coordinate>883</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -45,10 +45,10 @@
 
 	<entity>
 		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.NexusUserApplicationRef</entity-name>
-		<entity-width>120</entity-width>
+		<entity-width>161</entity-width>
 		<entity-height>166</entity-height>
-		<entity-X-Coordinate>-1170</entity-X-Coordinate>
-		<entity-Y-Coordinate>879</entity-Y-Coordinate>
+		<entity-X-Coordinate>-1191</entity-X-Coordinate>
+		<entity-Y-Coordinate>923</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -146,8 +146,8 @@
 		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.WalletRecord</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>306</entity-height>
-		<entity-X-Coordinate>-24</entity-X-Coordinate>
-		<entity-Y-Coordinate>686</entity-Y-Coordinate>
+		<entity-X-Coordinate>-160</entity-X-Coordinate>
+		<entity-Y-Coordinate>522</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -201,30 +201,8 @@
 		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.WalletAccount</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>266</entity-height>
-		<entity-X-Coordinate>-404</entity-X-Coordinate>
-		<entity-Y-Coordinate>899</entity-Y-Coordinate>
-		<primary-collapsed>false</primary-collapsed>
-		<relation-collapsed>false</relation-collapsed>
-		<basic-collapsed>false</basic-collapsed>
-	</entity>
-
-	<entity>
-		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.NexusPerson</entity-name>
-		<entity-width>120</entity-width>
-		<entity-height>686</entity-height>
-		<entity-X-Coordinate>-1170</entity-X-Coordinate>
-		<entity-Y-Coordinate>123</entity-Y-Coordinate>
-		<primary-collapsed>false</primary-collapsed>
-		<relation-collapsed>false</relation-collapsed>
-		<basic-collapsed>false</basic-collapsed>
-	</entity>
-
-	<entity>
-		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.ObservedSiteHistory</entity-name>
-		<entity-width>120</entity-width>
-		<entity-height>206</entity-height>
-		<entity-X-Coordinate>766</entity-X-Coordinate>
-		<entity-Y-Coordinate>706</entity-Y-Coordinate>
+		<entity-X-Coordinate>-503</entity-X-Coordinate>
+		<entity-Y-Coordinate>734</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -242,6 +220,28 @@
 	</entity>
 
 	<entity>
+		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.ObservedSiteHistory</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>206</entity-height>
+		<entity-X-Coordinate>766</entity-X-Coordinate>
+		<entity-Y-Coordinate>706</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.NexusPerson</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>686</entity-height>
+		<entity-X-Coordinate>-1170</entity-X-Coordinate>
+		<entity-Y-Coordinate>123</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
 		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.ProductCategory</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>166</entity-height>
@@ -253,22 +253,22 @@
 	</entity>
 
 	<entity>
-		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.WalletType</entity-name>
+		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.JUserProject</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>266</entity-height>
-		<entity-X-Coordinate>-404</entity-X-Coordinate>
-		<entity-Y-Coordinate>498</entity-Y-Coordinate>
+		<entity-height>166</entity-height>
+		<entity-X-Coordinate>-1274</entity-X-Coordinate>
+		<entity-Y-Coordinate>-160</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
 	</entity>
 
 	<entity>
-		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.JUserProject</entity-name>
+		<entity-name>com.timeron.NexusDatabaseLibrary.Entity.WalletType</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>166</entity-height>
-		<entity-X-Coordinate>-1274</entity-X-Coordinate>
-		<entity-Y-Coordinate>-160</entity-Y-Coordinate>
+		<entity-height>266</entity-height>
+		<entity-X-Coordinate>60</entity-X-Coordinate>
+		<entity-Y-Coordinate>542</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
