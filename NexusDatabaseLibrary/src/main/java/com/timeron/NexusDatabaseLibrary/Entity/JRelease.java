@@ -10,17 +10,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.timeron.NexusDatabaseLibrary.Entity.Interface.NexusEntity;
+
 /**
  * Entity implementation class for Entity: JRelease
  *
  */
 @Entity
 @Table(name="j_release")
-public class JRelease {
+public class JRelease implements NexusEntity {
 	
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	private String version;
 	private String comment;
 	
@@ -31,7 +33,7 @@ public class JRelease {
 	@OneToMany(mappedBy="release")
 	List<JTask> jTasks;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -69,6 +71,37 @@ public class JRelease {
 
 	public void setjTasks(List<JTask> jTasks) {
 		this.jTasks = jTasks;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((version == null) ? 0 : version.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		JRelease other = (JRelease) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (version == null) {
+			if (other.version != null)
+				return false;
+		} else if (!version.equals(other.version))
+			return false;
+		return true;
 	}
 	
 	

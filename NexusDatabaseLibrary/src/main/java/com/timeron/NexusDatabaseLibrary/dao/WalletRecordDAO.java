@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -196,5 +197,20 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 		save(walletRecord);
 		save(walletTransferRecord);
 	}
+
+	@Transactional
+	public WalletRecord getDestinationSourceForRecord(WalletRecord record, boolean isSource) {
+		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
+		criteria = criteria.add(Restrictions.eq("transfer", true)).add(Restrictions.eq("date", new Date(record.getDate().getMillis()))).add(Restrictions.eq("income", !isSource));
+		return (WalletRecord) criteria.uniqueResult();
+	}
 	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<WalletRecord> getAllRecordsFromDay(WalletAccount account, DateTime from, DateTime to){
+		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
+		criteria.add(Restrictions.eq("walletAccount", account));
+		criteria.add(Restrictions.between("date", new Date(from.getMillis()), new Date(to.getMillis())));
+		return criteria.list();
+	}
 }

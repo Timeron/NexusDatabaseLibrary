@@ -47,7 +47,7 @@ public class WalletTypeDAO extends DaoImp<WalletType>{
 
 	@Transactional
 	@SuppressWarnings("unchecked")
-	public List<WalletType> getAllParents() {
+	public List<WalletType> getAllTypesAvailableForParent() {
 		List<WalletType> result = new ArrayList<WalletType>();
 		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 		criteria.add(Restrictions.isNull("parentType"));

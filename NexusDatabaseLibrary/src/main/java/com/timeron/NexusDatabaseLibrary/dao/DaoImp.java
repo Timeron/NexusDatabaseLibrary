@@ -135,19 +135,21 @@ public abstract class DaoImp<T> implements DAO<T> {
 	@SuppressWarnings("unchecked")
 	public T getById(Object id) {
 		T entity = null;
-		try {
-			Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
-			
-			criteria.add(Restrictions.idEq(id));
-			if(criteria.list().size()>0){
-				entity = (T) criteria.list().get(0);
-			}else{
-				entity = null;
+		if(id != null){
+			try {
+				Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
+				
+				criteria.add(Restrictions.idEq(id));
+				if(criteria.list().size()>0){
+					entity = (T) criteria.list().get(0);
+				}else{
+					entity = null;
+				}
+			} catch (HibernateException ex) {
+				ex.printStackTrace();
+			} finally {
+	
 			}
-		} catch (HibernateException ex) {
-			ex.printStackTrace();
-		} finally {
-
 		}
 		if(entity == null){
 			LOG.warn(persistantClass.getCanonicalName() + " - can not get value by id: "+id.toString());
@@ -159,19 +161,21 @@ public abstract class DaoImp<T> implements DAO<T> {
 	@SuppressWarnings("unchecked")
 	public List<T> getByIdInList(List<Object> ids) {
 		List<T> entity = new ArrayList<T>();
-		try {
-			Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
-			
-			criteria.add(Restrictions.in("id", ids.toArray()));
-			if(criteria.list().size()>0){
-				entity = (List<T>) criteria.list().get(0);
-			}else{
-				return Collections.emptyList();
+		if(ids != null && !ids.isEmpty()){
+			try {
+				Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
+				
+				criteria.add(Restrictions.in("id", ids.toArray()));
+				if(criteria.list().size()>0){
+					entity = (List<T>) criteria.list().get(0);
+				}else{
+					return Collections.emptyList();
+				}
+			} catch (HibernateException ex) {
+				ex.printStackTrace();
+			} finally {
+	
 			}
-		} catch (HibernateException ex) {
-			ex.printStackTrace();
-		} finally {
-
 		}
 		if(entity.isEmpty()){
 			LOG.warn(persistantClass.getCanonicalName() + " - can not get value by ids: "+ids.toString());

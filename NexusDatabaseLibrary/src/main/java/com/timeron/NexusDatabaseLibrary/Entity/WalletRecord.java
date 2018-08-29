@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.timeron.NexusDatabaseLibrary.Entity.Interface.NexusEntity;
@@ -23,7 +24,7 @@ public class WalletRecord implements NexusEntity {
 	}
 	
 	public WalletRecord(Integer id, float value, String description,
-			boolean income, boolean transfer, Date date, Date updated,
+			boolean income, boolean transfer, DateTime date, Date updated,
 			WalletType walletType, WalletAccount walletAccount,
 			WalletAccount destinationWalletAccount,
 			WalletAccount sourceWalletAccount) {
@@ -33,7 +34,7 @@ public class WalletRecord implements NexusEntity {
 		this.description = description;
 		this.income = income;
 		this.transfer = transfer;
-		this.date = date;
+		this.date = new Date(date.getMillis());
 		this.updated = updated;
 		this.walletType = walletType;
 		this.walletAccount = walletAccount;
@@ -96,8 +97,11 @@ public class WalletRecord implements NexusEntity {
 	public void setTransfer(boolean transfer) {
 		this.transfer = transfer;
 	}
-	public Date getDate() {
-		return date;
+	public DateTime getDate() {
+		return new DateTime(date);
+	}
+	public void setDate(DateTime date) {
+		this.date = new Date(date.getMillis());
 	}
 	public void setDate(Date date) {
 		this.date = date;

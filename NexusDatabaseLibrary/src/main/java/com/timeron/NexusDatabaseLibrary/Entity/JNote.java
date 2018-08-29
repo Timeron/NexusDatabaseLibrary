@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import com.timeron.NexusDatabaseLibrary.Entity.Interface.NexusEntity;
 
 @Entity
-@Table(name="j_Note")
+@Table(name="j_note")
 public class JNote implements NexusEntity{
 
 	@Id

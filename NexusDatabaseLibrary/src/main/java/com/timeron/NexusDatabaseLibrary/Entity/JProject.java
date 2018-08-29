@@ -2,6 +2,7 @@ package com.timeron.NexusDatabaseLibrary.Entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -30,8 +31,8 @@ public class JProject {
 	@OneToMany(mappedBy="project", fetch=FetchType.EAGER)
 	private List<JTask> task;
 	
-	@OneToMany(mappedBy="project")
-	private List<JRelease> releases;
+	@OneToMany(mappedBy="project", fetch=FetchType.EAGER)
+	private Set<JRelease> releases;
 	
 	@ManyToOne
 	@JoinColumn(name="status", nullable = true)
@@ -106,11 +107,11 @@ public class JProject {
 		this.user = user;
 	}
 
-	public List<JRelease> getReleases() {
+	public Set<JRelease> getReleases() {
 		return releases;
 	}
 
-	public void setReleases(List<JRelease> releases) {
+	public void setReleases(Set<JRelease> releases) {
 		this.releases = releases;
 	}
 
