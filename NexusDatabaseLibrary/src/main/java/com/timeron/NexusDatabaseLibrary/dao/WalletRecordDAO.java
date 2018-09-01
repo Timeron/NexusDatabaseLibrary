@@ -211,6 +211,7 @@ public class WalletRecordDAO extends DaoImp<WalletRecord>{
 		Criteria criteria = JpaHelper.createCriteria(entityManager, persistantClass);
 		criteria.add(Restrictions.eq("walletAccount", account));
 		criteria.add(Restrictions.between("date", new Date(from.getMillis()), new Date(to.getMillis())));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		return criteria.list();
 	}
 }
